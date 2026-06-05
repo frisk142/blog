@@ -33,6 +33,11 @@ import BlogCard from '../components/Blog-Card.vue';
   align-items: center;
 }
 
+.card-text{
+  flex: 2;
+  
+}
+
 .avatar {
   position: relative;
   width: 248px;
