@@ -7,20 +7,29 @@
         说声“你好”
       </Blog-Button>
       <p v-if="msg">{{ msg }}</p>
-    </Blog-Card>
-        <h2>关于这个博客</h2>
-      <p>这是一个记录我个人成长和学习的博客，分享我的经历、想法和见解。希望通过这个平台与更多人交流和学习。</p>
+       <blog-card>
+          <h2>关于这个博客</h2>
+        <p>这是一个记录我个人成长和学习的博客，分享我的经历、想法和见解。希望通过这个平台与更多人交流和学习。</p>
+        </blog-card>
+      </Blog-Card>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import BlogCard from '../components/Blog-Card.vue'
 import BlogButton from '../components/Blog-Button.vue'
+
+const msg = ref("")
+
+function showMessage() {
+  msg.value = "你好！欢迎来到我的博客！";
+} 
 </script>
 
 <style scoped>
 .app {
-    background:url("public/01.jpg") no-repeat center center;
+    background:url("/public/images/Home_View.jpg") no-repeat center center;
   display: flex;
   flex-direction: column;
   justify-content: center;
