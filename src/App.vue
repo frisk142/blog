@@ -1,4 +1,5 @@
 <template>
+<body style = "margin: 0; padding: 0;">
   <div>
     <nav>
       <router-link to = "/">首页</router-link>
@@ -6,6 +7,7 @@
     </nav>
     <router-view />
   </div>
+</body>
 </template>
 
 <style>

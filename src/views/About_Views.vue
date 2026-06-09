@@ -1,4 +1,5 @@
 <template>
+<body style = "margin: 0; padding: 0;">
   <div class="about">
     <h1>关于我</h1>
     <Blog-Card>
@@ -7,6 +8,7 @@
       <p>希望通过博客记录成长，分享技术心得</p>
     </Blog-Card>
   </div>
+</body>
 </template>
 
 <script setup>
@@ -15,7 +17,8 @@ import BlogCard from '../components/Blog-Card.vue';
 
 <style scoped>
 .about{
-    background:url("public/images/Home_View.jpg") no-repeat center center;
+  background:url("public/images/Home_View.jpg") no-repeat center center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
