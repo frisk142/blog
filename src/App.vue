@@ -1,5 +1,4 @@
 <template>
-<body style = "margin: 0; padding: 0;">
   <div>
     <nav>
       <router-link to = "/">首页</router-link>
@@ -7,18 +6,23 @@
     </nav>
     <router-view />
   </div>
-</body>
 </template>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 nav {
-  text-align: cenrer;
+  text-align: center;
   padding: 2rem;
-  background-color: rbga(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 nav a{
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
   margin: 0 0.5rem;
   text-decoration: none;
 }
