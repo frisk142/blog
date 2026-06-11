@@ -3,14 +3,14 @@
   <slot: list = 'list'/>
   
   <div v-if = 'loading' class = 'load-more'>加载中...</div>
-  <div v-else-if = 'finished' class = 'load-more'>没有更多了</div>
+  <div v-if = 'finished' class = 'load-more'>没有更多了</div>
  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const props = defineprops({
+const props = defineProps({
     fetcApi:{
         type: Function,
         required: true
@@ -51,4 +51,39 @@ async function loadMore(){
     }
 }
 
+function handleScroll(){
+    const scrollTop = document.documentElement.scrolltop || document.body.scrollTop
+     
+    const clientHeight = document.documentElement.clientHeight
+
+    const scrollHeight = document.documentElement.scrollHeight
+
+    if (scrollTop + clientHeight >= scrollHeight - props.threshold){
+        loadMore()
+    }
+}
+
+onMounted(() => {
+    loadMore()
+    window.addEventListener("scroll", handleScroll)
+})
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll)
+})
+
 </script>
+
+<style scoped>
+.infinitle-scroll-container {
+    width: 100%;
+}
+
+.load-more {
+    text-align: center;
+    padding: 1rem;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+</style>
