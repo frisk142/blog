@@ -15,9 +15,6 @@
     width: 100%;
     color: #eee;
     transition: all 0.2s ease;
-    position: fixed;
-    top: 300px;
-    right: 50px;
 }
 
 .Blog-Linecard:hover {

@@ -11,18 +11,42 @@
         <p>这是一个记录我个人成长和学习的博客，分享我的经历、想法和见解。希望通过这个平台与更多人交流和学习。</p>
     </Blog-Linecard>
   </div>
+  <InfiniteScroll :fetchApi="fetchArticles" :limit="5">
+    <template #default="{ list }">
+      <div v-for="item in list" :key="item.id" clas="article-card">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.content }}</p>
+      </div>
+    </template>
+  </InfiniteScroll>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import BlogButton from '../components/Blog-Button.vue'
 import BlogLinecard from '../components/Blog-Linecard.vue'
+import InfiniteScroll from '../components/InfiniteScroll.vue'
 
 const msg = ref("")
+
 
 function showMessage() {
   msg.value = "你好！欢迎来到我的博客！";
 } 
+
+async function fetchArticles(page, limit) {
+  await new Promise(resolve => setTimeout(resolve, 500))
+  if (page > 3) return []
+  const newItems = []
+  for (let i = 0; i < limit; i++) {
+    newItems.push({
+      id: (page - 1) * limit + i + 1,
+      title: `文章 ${(page - 1) * limit + i + 1}` ,
+      content: '这是内容' 
+    })
+  }
+  return newItems
+}
 </script>
 
 <style scoped>

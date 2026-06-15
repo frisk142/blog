@@ -10,8 +10,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const props = defineProps({
-    fetcApi:{
+//获取网页内容，
+const props = defineProps({ 
+    fetchApi:{
         type: Function,
         required: true
     },
@@ -36,7 +37,7 @@ async function loadMore(){
 
     loading.value = true
     try{
-        const newItems = await props.fetcApi(page.value, props.limit)
+        const newItems = await props.fetchApi(page.value, props.limit)
 
         if (!newItems || newItems.length === 0){
             finished.value = true
