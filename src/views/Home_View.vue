@@ -1,24 +1,11 @@
 <template>
-  <div class="app">
-    <Blog-Linecard>
-      <h1>blog</h1>
-      <p>深海的房间里，藏着少女青涩的梦。<br>正在搭建中，敬请期待～</p>
-        <Blog-Button @click="showMessage">
-          说声“你好”
-        </Blog-Button>
-          <p v-if="msg">{{ msg }}</p>
-          <h2>关于这个博客</h2>
-        <p>这是一个记录我个人成长和学习的博客，分享我的经历、想法和见解。希望通过这个平台与更多人交流和学习。</p>
-    </Blog-Linecard>
-  </div>
-  <InfiniteScroll :fetchApi="fetchArticles" :limit="5">
-    <template #default="{ list }">
-      <div v-for="item in list" :key="item.id" clas="article-card">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.content }}</p>
-      </div>
-    </template>
-  </InfiniteScroll>
+  <div class="two-columns">
+    <aside class="left-sidebar">
+      <BlogLinecard>
+        <h1>
+
+
+
 </template>
 
 <script setup>
@@ -26,6 +13,7 @@ import { ref } from 'vue'
 import BlogButton from '../components/Blog-Button.vue'
 import BlogLinecard from '../components/Blog-Linecard.vue'
 import InfiniteScroll from '../components/InfiniteScroll.vue'
+import AvatarComponent from '../Avatar-component.vue'
 
 const msg = ref("")
 
