@@ -1,5 +1,5 @@
 <template>
-    <div class="Avatar-component">
+    <div class="Avatar-component" :style="dynamicStyle">
     </div>
 </template>
 
@@ -11,7 +11,11 @@ const props = defineProps({
     right: {type: String, default: 'auto'},
     bottom: {type: String, default: 'auto'},
     zIndex: {type: String, default: 'auto'},
-    bgurl: {type: String, default: 'auto'}
+    bgUrl: {type: String, default: ''},
+    width: {type: String, default: '200px'},
+    height: {type: String, default: '200px'},
+    borderRadius: {type: String, default: '20px'}
+
 })
 
 const dynamicStyle = {
@@ -21,7 +25,10 @@ const dynamicStyle = {
     right: props.right,
     bottom: props.bottom,
     zIndex: props.zIndex,
-    bgurl: props.bgurl
+    backgroundImage: props.bgUrl ? `url(${props.bgUrl})` : 'url(/public/image/my.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: "center center",
+    backgroundRepeat: 'no-repeat',
 
 }
 
@@ -29,10 +36,7 @@ const dynamicStyle = {
 
 <style scoped>
 .Avatar-component{
-    background: url(/public/images/my.jpg) no-repeat center center;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    background-size: cover;
+    display: inline-block;
+
 }
 </style>

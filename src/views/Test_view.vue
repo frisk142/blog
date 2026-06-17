@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <BlogLinecard>
             <AvatarComponent>
             <h1>无糖红茶</h1>
@@ -14,9 +14,11 @@ import BlogLinecard from '@/components/Blog-Linecard.vue';
 </script>
 
 <style>
-body{
+.page{
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
     background: url(/public/images/Home_View.jpg) no-repeat center center;
     z-index: -1;
 }
