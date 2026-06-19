@@ -1,11 +1,26 @@
 <template>
   <div class="page-bg">
+    <AvatarComponent v-bind="avatarCofig" >
+    </AvatarComponent>
   </div>
 </template>
 
 
 <script setup>
+import AvatarComponent from '../components/Avatar-component.vue';
+
+const avatarCofig = {
+  position: 'fixed',
+  top: '200px',
+  left: '30px',
+  zIndex: '999',
+  width: '200px',
+  height: '200px',
+  borderRadius: '50%',
+  bgUrl: '/images/my.jpg',
+}
 </script>
+
 
 <style>
  .page-bg{

@@ -25,8 +25,10 @@ const dynamicStyle = {
     right: props.right,
     bottom: props.bottom,
     zIndex: props.zIndex,
+    width: props.width,
+    height: props.height,
     backgroundImage: props.bgUrl ? `url(${props.bgUrl})` : 'url(/public/image/my.jpg)',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundPosition: "center center",
     backgroundRepeat: 'no-repeat',
 
@@ -37,6 +39,8 @@ const dynamicStyle = {
 <style scoped>
 .Avatar-component{
     display: inline-block;
+    background-color: #ff7b2c !important;
+    border: 10px solid red;
 
 }
 </style>

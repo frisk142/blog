@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <BlogLinecard>
-            <AvatarComponent>
+            <AvatarComponent v-bind="avatarConfig">
             <h1>无糖红茶</h1>
             </AvatarComponent>
         </BlogLinecard>
@@ -11,6 +11,15 @@
 <script setup>
 import AvatarComponent from '@/components/Avatar-component.vue';
 import BlogLinecard from '@/components/Blog-Linecard.vue'; 
+
+const avatarConfig = {
+    position: 'fixed',
+    top: '200px',
+    left: '30px',
+    zIndex: '999',
+    width: '200',
+    height: '200',
+}
 </script>
 
 <style>
@@ -22,4 +31,6 @@ import BlogLinecard from '@/components/Blog-Linecard.vue';
     background: url(/public/images/Home_View.jpg) no-repeat center center;
     z-index: -1;
 }
+
+
 </style>
