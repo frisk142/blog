@@ -1,20 +1,46 @@
 <template>
-    <div class = "Blog-Linecard">
+    <div class = "Blog-Linecard" :style="dynamicStyle">
     <slot></slot>
     </div>
 </template>
 
+<script setup>
+const props = defineProps({
+    position: {type: String, default:'static'},
+    top: {type: String, default: 'static'},
+    left: {type: String, default: 'static'},
+    right: {type: String, default: 'staic'},
+    bottm: {type: String, default: 'staic'},
+    zIndex: {type: String, default: 'staic'},
+    width: {type: String, default: 'staic'},
+    heigth: {type: String, default: 'staic'}
+})
+const dynamicStyle = {
+    position: props.position,
+    top: props.top,
+    left: props.left,
+    right: props.right,
+    bottm: props.bottm,
+    zIndex: props.zIndex,
+    width: props.width,
+    heigth: props.heigth,
+}
+
+
+</script>
+
 <style scoped>
 .Blog-Linecard {
-    max-width: 500px;
-    width: 90%;
-    
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    width: 100%;
-    color: #eee;
-    transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  color: white;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .Blog-Linecard:hover {

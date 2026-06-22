@@ -39,8 +39,6 @@ const dynamicStyle = {
 <style scoped>
 .Avatar-component{
     display: inline-block;
-    background-color: #ff7b2c !important;
-    border: 10px solid red;
 
 }
 </style>
