@@ -27,7 +27,7 @@ const dynamicStyle = {
     zIndex: props.zIndex,
     width: props.width,
     height: props.height,
-    backgroundImage: props.bgUrl ? `url(${props.bgUrl})` : 'url(/public/image/my.jpg)',
+    backgroundImage: props.bgUrl ? `url(${props.bgUrl})` : 'url(/image/my.jpg)',
     backgroundSize: 'contain',
     backgroundPosition: "center center",
     backgroundRepeat: 'no-repeat',

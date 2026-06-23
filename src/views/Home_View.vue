@@ -37,11 +37,12 @@ const LinecardCofig = {
 <style>
  .page-bg{
   position: absolute;
-  background: url(/images/Home_View.jpg);
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
  }
 </style>
