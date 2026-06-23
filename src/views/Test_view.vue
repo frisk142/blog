@@ -28,7 +28,6 @@ const avatarConfig = {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: url(/public/images/Home_View.jpg) no-repeat center center;
     z-index: -1;
 }
 

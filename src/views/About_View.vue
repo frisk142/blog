@@ -17,7 +17,6 @@ import BlogCard from '../components/Blog-Card.vue';
 
 <style scoped>
 .about{
-  background:url("public/images/Home_View.jpg") no-repeat center center;
   background-size: cover;
   display: flex;
   flex-direction: column;

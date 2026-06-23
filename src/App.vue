@@ -36,7 +36,8 @@ html, body{
 nav {
   text-align: center;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
   z-index: 999;
 }
 

@@ -3,7 +3,9 @@
     <BlogLinecard v-bind="LinecardCofig" >
     <AvatarComponent v-bind="avatarCofig" >
     </AvatarComponent>
-    <p>无糖红茶</p>
+    <h3>无糖红茶</h3>
+    <p class="small-text">一个乐于分享自己所见所得的技术宅</p>
+
     </BlogLinecard>
   </div>
 </template>
@@ -31,6 +33,8 @@ const LinecardCofig = {
   height: '200px' 
 
 }
+
+
 </script>
 
 
@@ -44,5 +48,9 @@ const LinecardCofig = {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
+ }
+
+ .small-text{
+  font-size: 10px;
  }
 </style>
