@@ -3,8 +3,8 @@
     <BlogLinecard v-bind="LinecardCofig" >
     <AvatarComponent v-bind="avatarCofig" >
     </AvatarComponent>
-    <h3>无糖红茶</h3>
-    <p class="small-text">一个乐于分享自己所见所得的技术宅</p>
+    <h3>{{ ProFile.name }}</h3>
+    <p class="small-text">{{ ProFile.title }}</p>
 
     </BlogLinecard>
   </div>
@@ -14,6 +14,7 @@
 <script setup>
 import AvatarComponent from '../components/Avatar-component.vue';
 import BlogLinecard from '../components/Blog-Linecard.vue';
+import {ProFile} from '@/config/ProFile.js'
 
 
 const avatarCofig = {
@@ -22,7 +23,7 @@ const avatarCofig = {
   width: '120px',
   height: '120px',
   borderRadius: '50%',
-  bgUrl: '/images/my.jpg',
+  bgUrl: ProFile.avatar,
 }
 
 const LinecardCofig = {
