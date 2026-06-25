@@ -5,7 +5,8 @@
     </AvatarComponent>
     <h3>{{ ProFile.name }}</h3>
     <p class="small-text">{{ ProFile.title }}</p>
-
+    <LinkCard v-bind="biliLInkCardCofig"/>
+    <LinkCard v-bind="githubLinkCofig"/>
     </BlogLinecard>
   </div>
 </template>
@@ -15,6 +16,7 @@
 import AvatarComponent from '../components/Avatar-component.vue';
 import BlogLinecard from '../components/Blog-Linecard.vue';
 import {ProFile} from '@/config/ProFile.js'
+import LinkCard from '@/components/Link-Card.vue';
 
 
 const avatarCofig = {
@@ -32,6 +34,27 @@ const LinecardCofig = {
   left: '30px',
   width: '200px',
   height: '200px' 
+}
+
+const biliLInkCardCofig = {
+  position: 'relative',
+  zIndex: '999',
+  width: '20px',
+  height: '20px',
+  iconUrl: '/icon/bilibili.ico',
+  to: ProFile.bilibiliUrl,
+  target: '_blank',
+  marginRight: '10px',
+}
+
+const githubLinkCofig = {
+  position: 'relative',
+  zIndex: '999',
+  width: '20px',
+  height: '20px',
+  iconUrl: '/icon/github.svg',
+  to: ProFile.github,
+  target: '_blank'
 
 }
 

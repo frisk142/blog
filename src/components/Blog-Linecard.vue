@@ -41,10 +41,14 @@ const dynamicStyle = {
   color: white;
   text-align: center;
   margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-block;
 }
 
 .Blog-Linecard:hover {
     border-color: rgba(255, 255, 255, 1);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
 }
 </style>
