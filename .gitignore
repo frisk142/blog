@@ -43,3 +43,13 @@ __screenshots__/
 
 # profile
 ProFile.js
+.vercel
+.env*
+
+
+# Vercel CLI
+.vercel/
+.vercelignore
+dist/
+dist-ssr/
+.vite/
