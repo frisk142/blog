@@ -29,8 +29,9 @@ const dynamicStyle = {
     height: props.height,
     backgroundImage: props.bgUrl ? `url(${props.bgUrl})` : 'url(/image/my.jpg)',
     backgroundSize: 'contain',
-    backgroundPosition: "center center",
+    backgroundPosition: "center",
     backgroundRepeat: 'no-repeat',
+    borderRadius: props.borderRadius,
 
 }
 

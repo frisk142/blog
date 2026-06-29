@@ -1,12 +1,17 @@
 <template>
   <div class="page-bg">
-    <BlogLinecard v-bind="LinecardCofig" >
-    <AvatarComponent v-bind="avatarCofig" >
-    </AvatarComponent>
-    <h3>{{ ProFile.name }}</h3>
-    <p class="small-text">{{ ProFile.title }}</p>
-    <LinkCard v-bind="biliLInkCardCofig"/>
-    <LinkCard v-bind="githubLinkCofig"/>
+    <BlogLinecard v-bind="Linecardconfig">
+      <div class="profile-wrap">
+      <AvatarComponent v-bind="avatarconfig"/>
+        <div class="name-Format">
+          <h3>{{ ProFile.name }}</h3>
+          <p class="small-text">{{ ProFile.title }}</p>
+          <div class='link-group'>
+            <LinkCard v-bind="biliLInkCardconfig"/>
+            <LinkCard v-bind="githubLinkconfig"/>
+          </div>
+      </div>
+      </div>
     </BlogLinecard>
   </div>
 </template>
@@ -19,24 +24,25 @@ import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue';
 
 
-const avatarCofig = {
+const avatarconfig = {
   position: 'relative',
   zIndex: '999',
   width: '120px',
   height: '120px',
-  borderRadius: '50%',
   bgUrl: ProFile.avatar,
+  left: '0px',
+  borderRadius: '10%'
 }
 
-const LinecardCofig = {
+const Linecardconfig = {
   position: 'fixed',
   top: '200px',
   left: '30px',
-  width: '200px',
-  height: '200px' 
+  width: '500px',
+  height: '175px' 
 }
 
-const biliLInkCardCofig = {
+const biliLInkCardconfig = {
   position: 'relative',
   zIndex: '999',
   width: '20px',
@@ -47,7 +53,7 @@ const biliLInkCardCofig = {
   marginRight: '10px',
 }
 
-const githubLinkCofig = {
+const githubLinkconfig = {
   position: 'relative',
   zIndex: '999',
   width: '20px',
@@ -77,4 +83,21 @@ const githubLinkCofig = {
  .small-text{
   font-size: 10px;
  }
+
+ .profile-wrap{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+ }
+
+  .link-group {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+ }
+
+ .name-Format{
+  position: block;
+ }
+
 </style>

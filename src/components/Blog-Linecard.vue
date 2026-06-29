@@ -39,7 +39,6 @@ const dynamicStyle = {
   max-width: 600px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   color: white;
-  text-align: center;
   margin: 0 auto;
   cursor: pointer;
   transition: transform 0.2s ease;
