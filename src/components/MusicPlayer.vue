@@ -48,6 +48,17 @@ const playSong = (song) => {
         isPlaying.value = true
     }
 }
+
+const prevSong = () => {
+    const total = songsList.value.length
+    currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
+    if (audio.value) {
+        audio.value.src = currentSong.value.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
+}
 </script>
 
 <style scoped>
