@@ -8,13 +8,12 @@ import {songs} from '@/config/songs'
 
 
 const audio = ref(null)
-const isPlaying = ref(false)
-const currentTime = ref(0)  
-const duration = ref(0)
-const volume = ref(0.8)
-const currenSongIndex = ref(0)
-
-const songsList = ref(songs)
+const isPlaying = ref(false) // 播放
+const currentTime = ref(0)  // 播放时长
+const duration = ref(0)  // 总时长
+const volume = ref(0.8)  // 音量
+const currenSongIndex = ref(0)  //歌曲索引
+const songsList = ref(songs)  // 歌曲列表
 
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
@@ -48,7 +47,7 @@ const playSong = (song) => {
         isPlaying.value = true
     }
 }
-
+//上一曲
 const prevSong = () => {
     const total = songsList.value.length
     currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
@@ -57,6 +56,26 @@ const prevSong = () => {
         audio.value.load()
         audio.value.play()
         isPlaying.value = true
+    }
+}
+
+//下一曲
+const nextsong = () => {
+    const total = songsList.value.length
+    currenSongIndex.value= (currenSongIndex.value + 1) % total
+    if (audio.value) {
+        audio.value.src = currentSong.value.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
+}
+
+// 跳转到指定进度
+const seekTo = (event) => {
+    const val = parseFloat(event.target.value)
+    if (audio.value && duration.value > 0) {
+        audio.value.currentTime = (val / 100) * duration.value
     }
 }
 </script>
