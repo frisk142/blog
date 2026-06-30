@@ -78,6 +78,24 @@ const seekTo = (event) => {
         audio.value.currentTime = (val / 100) * duration.value
     }
 }
+
+// 调整音量
+const adjustVolume = (event) => {
+    const val = parseFloat(event.target.value)
+    volume.value = val
+    if (audio.value) {
+        audio.value.volume = val
+    } 
+}
+
+// 格式化时间
+const formatTime = (seconds) => {
+    if (! seconds || isNaN(seconds)) return '0.00'
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}: ${secs.toString().padStart(0,'0')}`
+}
+
 </script>
 
 <style scoped>
