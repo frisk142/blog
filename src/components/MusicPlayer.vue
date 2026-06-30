@@ -1,5 +1,6 @@
 <template>
-    /
+    <div class="MusicPlay">
+    </div>
 </template>
 
 <script setup>
@@ -99,4 +100,24 @@ const formatTime = (seconds) => {
 </script>
 
 <style scoped>
+.MusicPlay{
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  color: white;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.MusicPlay:hover {
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
 </style>

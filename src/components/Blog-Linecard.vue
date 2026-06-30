@@ -13,7 +13,7 @@ const props = defineProps({
     bottom: {type: String, default: 'staic'},
     zIndex: {type: String, default: 'staic'},
     width: {type: String, default: 'staic'},
-    heigth: {type: String, default: 'staic'}
+    height: {type: String, default: 'staic'}
 })
 const dynamicStyle = {
     position: props.position,
@@ -23,7 +23,7 @@ const dynamicStyle = {
     bottom: props.bottom,
     zIndex: props.zIndex,
     width: props.width,
-    heigth: props.heigth,
+    height: props.height,
 }
 
 
