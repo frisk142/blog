@@ -21,7 +21,7 @@ const currentSong = computed(() => {
 
 const progress = computed(() => {
     if (duration.value === 0) return 0
-    return (currenSongIndex.value / duration.value) * 100
+    return (currentTime.value / duration.value) * 100
 })
 
 //播放与暂停
