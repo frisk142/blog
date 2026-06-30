@@ -1,24 +1,22 @@
 <template>
     <div class="page">
-        <BlogLinecard>
-            <AvatarComponent v-bind="avatarConfig">
-            <h1>无糖红茶</h1>
-            </AvatarComponent>
-        </BlogLinecard>
+      <MusicPlayer v-bind="MusicPlayerConfig"/>
     </div>
 </template>
 
 <script setup>
-import AvatarComponent from '@/components/Avatar-component.vue';
-import BlogLinecard from '@/components/Blog-Linecard.vue'; 
+import MusicPlayer from '@/components/MusicPlayer.vue';
 
-const avatarConfig = {
+
+
+const MusicPlayerConfig =  {
     position: 'fixed',
     top: '200px',
-    left: '30px',
-    zIndex: '999',
-    width: '200',
-    height: '200',
+    height: '200px',
+    width: '350px',
+    right: '200px'
+
+
 }
 </script>
 
