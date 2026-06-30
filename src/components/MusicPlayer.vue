@@ -25,6 +25,7 @@ const progress = computed(() => {
     return (currenSongIndex.value / duration.value) * 100
 })
 
+//播放与暂停
 const toggleplay = () => {
     if (!audio.value) return
     if (isPlaying.value){
@@ -33,6 +34,19 @@ const toggleplay = () => {
         audio.value.play()
     }
     isPlaying.value = !isPlaying.value
+}
+
+//播放指定歌曲
+const playSong = (song) => {
+    const index = songsList.value.findIndex(s => s.id === song.id)
+    if (index === -1) return
+    currenSongIndex.value = index
+    if (audio.value) {
+        audio.value.src = song.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
 }
 </script>
 
