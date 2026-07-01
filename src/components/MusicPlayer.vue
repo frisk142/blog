@@ -1,6 +1,9 @@
 <template>
     <div class="MusicPlay" :style="dynamicStyle">
         <div class="Playbtn">
+            <svg width="12" height="14" viewBox="0 0 12 14">
+              <path d="M0 0L12 7L0 14Z" fill="#fff" />
+            </svg>
         </div>
     </div>
 </template>
@@ -144,6 +147,9 @@ const dynamicStyle = computed(() => ({
     background: rgba(0, 255, 255, 0.6);
     border-radius: 100px;
     margin: 100px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .MusicPlay:hover {
@@ -156,5 +162,5 @@ const dynamicStyle = computed(() => ({
   border-color: rgba(0, 255, 255, 0.9);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);
+  transition: transform 0.5s ease;
 }
-</style>
