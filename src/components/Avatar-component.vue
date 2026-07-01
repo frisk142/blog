@@ -4,6 +4,8 @@
 </template>
 
 <script setup>
+import {computed} from 'vue'
+
 const props = defineProps({
     position: {type: String, default: 'static'},
     top: {type: String, default: 'auto'},
@@ -18,7 +20,7 @@ const props = defineProps({
 
 })
 
-const dynamicStyle = {
+const dynamicStyle = computed(() => ({
     position: props.position,
     top: props.top,
     left: props.left,
@@ -32,8 +34,7 @@ const dynamicStyle = {
     backgroundPosition: "center",
     backgroundRepeat: 'no-repeat',
     borderRadius: props.borderRadius,
-
-}
+}))
 
 </script>
 

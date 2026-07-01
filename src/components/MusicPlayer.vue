@@ -19,7 +19,7 @@ const props = defineProps({
   width: {type: String, default: ''},
   height: {type: String, default: ''}
 })
-const dynamicStyle = {
+const dynamicStyle = computed(() => ({
   position: props.position,
   top: props.top,
   left: props.left,
@@ -28,7 +28,7 @@ const dynamicStyle = {
   zIndex: props.zIndex,
   width: props.width,
   height: props.height,
-}
+}))
 
 
 // const audio = ref(null)
@@ -141,7 +141,7 @@ const dynamicStyle = {
     position: relative;
     width: 30px;
     height: 30px;
-    background: rgba(0, 255, 255, 0.9);
+    background: rgba(0, 255, 255, 0.6);
     border-radius: 100px;
     margin: 100px auto;
 }
@@ -150,5 +150,11 @@ const dynamicStyle = {
     border-color: rgba(255, 255, 255, 1);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     transform: scale(1.05);
+}
+
+.Playbtn:hover {
+  border-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 </style>

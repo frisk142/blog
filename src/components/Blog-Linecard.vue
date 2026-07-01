@@ -5,6 +5,8 @@
 </template>
 
 <script setup>
+import {computed} from 'vue'
+
 const props = defineProps({
     position: {type: String, default:'static'},
     top: {type: String, default: 'static'},
@@ -15,7 +17,7 @@ const props = defineProps({
     width: {type: String, default: 'staic'},
     height: {type: String, default: 'staic'}
 })
-const dynamicStyle = {
+const dynamicStyle = computed(() => ({
     position: props.position,
     top: props.top,
     left: props.left,
@@ -24,7 +26,7 @@ const dynamicStyle = {
     zIndex: props.zIndex,
     width: props.width,
     height: props.height,
-}
+}))
 
 
 </script>
