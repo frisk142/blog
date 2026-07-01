@@ -20,25 +20,29 @@ html, body{
   position: relative;
   height: 100%;
   overflow: hidden;
+  background: url(/images/Home_View.jpg) center/cover no-repeat fixed;
 }
 
 .app-wrap::before{
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url(/images/Home_View.jpg) center/cover no-repeat fixed;
-  z-index: -1;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 nav {
-  text-align: center;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   z-index: 999;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 nav a{
