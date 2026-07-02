@@ -1,8 +1,10 @@
 <template>
     <div class="MusicPlay" :style="dynamicStyle">
-        <div class="Playbtn"></div>
+      <div class="music-icon">
         <div class="play-skip-back-btn"></div>
+        <div class="Playbtn"></div>
         <div class="play-skip-forward-btn"></div>
+      </div>
     </div>
 </template>
 
@@ -124,6 +126,14 @@ const dynamicStyle = computed(() => ({
 </script>
 
 <style scoped>
+.music-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 145px 0; 
+}
+
 .MusicPlay{
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
@@ -138,40 +148,25 @@ const dynamicStyle = computed(() => ({
   display: inline-block;
 }
 
-.Playbtn{
+.Playbtn, .play-skip-back-btn, .play-skip-forward-btn {
     position: relative;
     width: 30px;
     height: 30px;
-    background-image: url(/icon/player-play.svg);
-    background-position: center;
     background-repeat: no-repeat;
     border-radius: 100px;
-    margin: 100px auto;
     transition: all 0.5s ease;
 }
 
 .play-skip-back-btn {
-  position: relative;
-  background-image: url(/icon/player-skip-back.svg);
-  width: 30px;
-  height: 30px;
-  border-radius: 100px;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 60px auto;
-  transition: all 0.5s ease;
+    background-image: url('/icon/player-skip-back.svg');
+}
+
+.Playbtn {
+    background-image: url('/icon/player-play.svg');
 }
 
 .play-skip-forward-btn {
-  position: relative;
-  background-image: url(/icon/player-skip-forward.svg);
-  width: 30px;
-  height: 30px;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 100px;
-  margin: 60px auto;
-  transition: all 0.5s ease;
+    background-image: url('/icon/player-skip-forward.svg');
 }
 
 .MusicPlay:hover {
