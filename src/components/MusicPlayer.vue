@@ -1,10 +1,8 @@
 <template>
     <div class="MusicPlay" :style="dynamicStyle">
-        <div class="Playbtn">
-            <svg width="12" height="14" viewBox="0 0 12 14">
-              <path d="M0 0L12 7L0 14Z" fill="#fff" />
-            </svg>
-        </div>
+        <div class="Playbtn"></div>
+        <div class="play-skip-back-btn"></div>
+        <div class="play-skip-forward-btn"></div>
     </div>
 </template>
 
@@ -144,12 +142,36 @@ const dynamicStyle = computed(() => ({
     position: relative;
     width: 30px;
     height: 30px;
-    background: rgba(0, 255, 255, 0.6);
+    background-image: url(/icon/player-play.svg);
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 100px;
     margin: 100px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.play-skip-back-btn {
+  position: relative;
+  background-image: url(/icon/player-skip-back.svg);
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 60px auto;
+  transition: all 0.5s ease;
+}
+
+.play-skip-forward-btn {
+  position: relative;
+  background-image: url(/icon/player-skip-forward.svg);
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 100px;
+  margin: 60px auto;
+  transition: all 0.5s ease;
 }
 
 .MusicPlay:hover {
@@ -159,10 +181,22 @@ const dynamicStyle = computed(() => ({
 }
 
 .Playbtn:hover {
-  border-color: rgba(0, 255, 255, 0.9);
+  background-color: rgba(0, 255, 255, 0.9);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);
-  transition: transform 0.5s ease;
 }
+
+.play-skip-back-btn:hover {
+  background-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.play-skip-forward-btn:hover {
+  background-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
 
 </style>
