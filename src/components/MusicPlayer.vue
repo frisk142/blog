@@ -155,6 +155,8 @@ const dynamicStyle = computed(() => ({
     background-repeat: no-repeat;
     border-radius: 100px;
     transition: all 0.5s ease;
+    background-position: center;
+    
 }
 
 .play-skip-back-btn {
