@@ -1,5 +1,7 @@
 <template>
     <div class="MusicPlay" :style="dynamicStyle">
+      <div class="music-progress">
+      </div>
       <div class="music-icon">
         <div class="play-skip-back-btn"></div>
         <div class="Playbtn"></div>
@@ -126,13 +128,6 @@ const dynamicStyle = computed(() => ({
 </script>
 
 <style scoped>
-.music-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  padding: 145px 0; 
-}
 
 .MusicPlay{
   background: rgba(255, 255, 255, 0.25);
@@ -146,6 +141,15 @@ const dynamicStyle = computed(() => ({
   cursor: pointer;
   transition: transform 0.2s ease;
   display: inline-block;
+
+}
+
+.music-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 145px 0; 
 }
 
 .Playbtn, .play-skip-back-btn, .play-skip-forward-btn {
@@ -157,6 +161,15 @@ const dynamicStyle = computed(() => ({
     transition: all 0.5s ease;
     background-position: center;
     
+}
+
+.music-progress {
+  display: flex;
+  width: 320px;
+  height: 10px;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+
 }
 
 .play-skip-back-btn {
