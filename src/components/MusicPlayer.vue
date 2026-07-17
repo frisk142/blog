@@ -2,7 +2,11 @@
 <div class="MusicPlay">
   <div class="music-icon">
     <div class="play-skip-back-btn"></div>
-    <div class="Playbtn"></div>
+    <div class="Playbtn"
+      :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }"
+      @click="toggleplay">
+      </div>
+
     <div class="play-skip-forward-btn"></div>
   </div>
 
@@ -36,33 +40,33 @@ const dynamicStyle = computed(() => ({
 }))
 
 
-// const audio = ref(null)
-// const isPlaying = ref(false) // 播放
-// const currentTime = ref(0)  // 播放时长
-// const duration = ref(0)  // 总时长
-// const volume = ref(0.8)  // 音量
-// const currenSongIndex = ref(0)  //歌曲索引
+const audio = ref(null)
+const isPlaying = ref(false) // 播放
+const currentTime = ref(0)  // 播放时长
+const duration = ref(0)  // 总时长
+const volume = ref(0.8)  // 音量
+const currenSongIndex = ref(0)  //歌曲索引
 // const songsList = ref(songs)  // 歌曲列表
 
-// const currentSong = computed(() => {
-//     return songsList.value[currenSongIndex.value] || null
-// })
+const currentSong = computed(() => {
+    return songsList.value[currenSongIndex.value] || null
+})
 
-// const progress = computed(() => {
-//     if (duration.value === 0) return 0
-//     return (currentTime.value / duration.value) * 100
-// })
+const progress = computed(() => {
+    if (duration.value === 0) return 0
+    return (currentTime.value / duration.value) * 100
+})
 
-// //播放与暂停
-// const toggleplay = () => {
-//     if (!audio.value) return
-//     if (isPlaying.value){
-//         audio.value.pause()
-//     } else {
-//         audio.value.play()
-//     }
-//     isPlaying.value = !isPlaying.value
-// }
+//播放与暂停
+const toggleplay = () => {
+    if (!audio.value) return
+    if (isPlaying.value){
+        audio.value.pause()
+    } else {
+        audio.value.play() 
+    }
+    isPlaying.value = !isPlaying.value
+}
 
 // //播放指定歌曲
 // const playSong = (song) => {
@@ -125,6 +129,7 @@ const dynamicStyle = computed(() => ({
 //     return `${mins}: ${secs.toString().padStart(0,'0')}`
 // }
 
+
 </script>
 
 <style scoped>
@@ -177,9 +182,6 @@ const dynamicStyle = computed(() => ({
     background-image: url('/icon/player-skip-back.svg');
 }
 
-.Playbtn {
-    background-image: url('/icon/player-play.svg');
-}
 
 .play-skip-forward-btn {
     background-image: url('/icon/player-skip-forward.svg');
@@ -208,6 +210,5 @@ const dynamicStyle = computed(() => ({
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);
 }
-
 
 </style>
