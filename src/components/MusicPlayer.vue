@@ -1,13 +1,13 @@
 <template>
-    <div class="MusicPlay" :style="dynamicStyle">
-      <div class="music-progress">
-      </div>
-      <div class="music-icon">
-        <div class="play-skip-back-btn"></div>
-        <div class="Playbtn"></div>
-        <div class="play-skip-forward-btn"></div>
-      </div>
-    </div>
+<div class="MusicPlay">
+  <div class="music-icon">
+    <div class="play-skip-back-btn"></div>
+    <div class="Playbtn"></div>
+    <div class="play-skip-forward-btn"></div>
+  </div>
+
+  <div class="music-progress"></div>
+</div>
 </template>
 
 <script setup>
@@ -77,7 +77,7 @@ const dynamicStyle = computed(() => ({
 //     }
 // }
 // //上一曲
-// const prevSong = () => {
+// const prevSong = () => { 
 //     const total = songsList.value.length
 //     currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
 //     if (audio.value) {
@@ -140,8 +140,11 @@ const dynamicStyle = computed(() => ({
   margin: 0 auto;
   cursor: pointer;
   transition: transform 0.2s ease;
-  display: inline-block;
-
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  gap: 20px;
+  align-items: center;
 }
 
 .music-icon {
@@ -149,7 +152,6 @@ const dynamicStyle = computed(() => ({
   align-items: center;
   justify-content: center;
   gap: 30px;
-  padding: 145px 0; 
 }
 
 .Playbtn, .play-skip-back-btn, .play-skip-forward-btn {
@@ -160,7 +162,7 @@ const dynamicStyle = computed(() => ({
     border-radius: 100px;
     transition: all 0.5s ease;
     background-position: center;
-    
+    padding: 6px;
 }
 
 .music-progress {
@@ -169,7 +171,6 @@ const dynamicStyle = computed(() => ({
   height: 10px;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.5);
-
 }
 
 .play-skip-back-btn {
