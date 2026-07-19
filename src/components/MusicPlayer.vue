@@ -1,13 +1,9 @@
 <template>
 <div class="MusicPlay">
   <div class="music-icon">
-    <div class="play-skip-back-btn"></div>
-    <div class="Playbtn"
-      :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }"
-      @click="toggleplay">
-      </div>
-
-    <div class="play-skip-forward-btn"></div>
+    <div class="play-skip-back-btn" @click="prevSong"></div>
+    <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
+    <div class="play-skip-forward-btn" @click="nextsong"></div>
   </div>
 
   <div class="music-progress"></div>
@@ -16,7 +12,7 @@
 
 <script setup>
 import {ref, computed, onMounted, onUnmounted, watch} from 'vue'
-// import {songs} from '@/config/songs'
+import {songs} from '@/config/songs'
 
 const props = defineProps({
   position: {type: String, default:'static'},
@@ -46,7 +42,7 @@ const currentTime = ref(0)  // 播放时长
 const duration = ref(0)  // 总时长
 const volume = ref(0.8)  // 音量
 const currenSongIndex = ref(0)  //歌曲索引
-// const songsList = ref(songs)  // 歌曲列表
+const songsList = ref(songs)  // 歌曲列表
 
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
@@ -58,12 +54,15 @@ const progress = computed(() => {
 })
 
 //播放与暂停
-const toggleplay = () => {
+const toggleplay = () => { 
+  console.log('toggleplay')
     if (!audio.value) return
     if (isPlaying.value){
         audio.value.pause()
+        console.log('暂停')
     } else {
         audio.value.play() 
+        console.log('播放')
     }
     isPlaying.value = !isPlaying.value
 }
@@ -80,29 +79,30 @@ const toggleplay = () => {
 //         isPlaying.value = true
 //     }
 // }
-// //上一曲
-// const prevSong = () => { 
-//     const total = songsList.value.length
-//     currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
-//     if (audio.value) {
-//         audio.value.src = currentSong.value.src
-//         audio.value.load()
-//         audio.value.play()
-//         isPlaying.value = true
-//     }
-// }
 
-// //下一曲
-// const nextsong = () => {
-//     const total = songsList.value.length
-//     currenSongIndex.value= (currenSongIndex.value + 1) % total
-//     if (audio.value) {
-//         audio.value.src = currentSong.value.src
-//         audio.value.load()
-//         audio.value.play()
-//         isPlaying.value = true
-//     }
-// }
+//上一曲
+const prevSong = () => { 
+    const total = songsList.value.length
+    currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
+    if (audio.value) {
+        audio.value.src = currentSong.value.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
+}
+
+//下一曲
+const nextsong = () => {
+    const total = songsList.value.length
+    currenSongIndex.value= (currenSongIndex.value + 1) % total
+    if (audio.value) {
+        audio.value.src = currentSong.value.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
+}
 
 // // 跳转到指定进度
 // const seekTo = (event) => {
@@ -128,6 +128,7 @@ const toggleplay = () => {
 //     const secs = Math.floor(seconds % 60)
 //     return `${mins}: ${secs.toString().padStart(0,'0')}`
 // }
+
 
 
 </script>
@@ -159,7 +160,7 @@ const toggleplay = () => {
   gap: 30px;
 }
 
-.Playbtn, .play-skip-back-btn, .play-skip-forward-btn {
+.Playbtn, .play-skip-back-btn, .play-skip-forward-btn { 
     position: relative;
     width: 30px;
     height: 30px;
