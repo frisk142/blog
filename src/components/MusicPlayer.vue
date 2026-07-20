@@ -1,9 +1,11 @@
 <template>
 <div class="MusicPlay">
   <div class="music-icon">
+    <div class="menu-btn"></div>
     <div class="play-skip-back-btn" @click="prevSong"></div>
     <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
     <div class="play-skip-forward-btn" @click="nextsong"></div>
+    <div class="volume-btn"></div>
   </div>
 
   <div class="music-progress"></div>
@@ -67,18 +69,18 @@ const toggleplay = () => {
     isPlaying.value = !isPlaying.value
 }
 
-// //播放指定歌曲
-// const playSong = (song) => {
-//     const index = songsList.value.findIndex(s => s.id === song.id)
-//     if (index === -1) return
-//     currenSongIndex.value = index
-//     if (audio.value) {
-//         audio.value.src = song.src
-//         audio.value.load()
-//         audio.value.play()
-//         isPlaying.value = true
-//     }
-// }
+//播放指定歌曲
+const playSong = (song) => {
+    const index = songsList.value.findIndex(s => s.id === song.id)
+    if (index === -1) return
+    currenSongIndex.value = index
+    if (audio.value) {
+        audio.value.src = song.src
+        audio.value.load()
+        audio.value.play()
+        isPlaying.value = true
+    }
+}
 
 //上一曲
 const prevSong = () => { 
@@ -129,7 +131,11 @@ const nextsong = () => {
 //     return `${mins}: ${secs.toString().padStart(0,'0')}`
 // }
 
-
+// 音频测试源
+onMounted(() => {
+  audio.value = new Audio(currentSong.value.src)
+  audio.value.volume = volume.value
+})
 
 </script>
 
@@ -160,7 +166,7 @@ const nextsong = () => {
   gap: 30px;
 }
 
-.Playbtn, .play-skip-back-btn, .play-skip-forward-btn { 
+.Playbtn, .play-skip-back-btn, .play-skip-forward-btn, .menu-btn, .volume-btn { 
     position: relative;
     width: 30px;
     height: 30px;
@@ -186,6 +192,14 @@ const nextsong = () => {
 
 .play-skip-forward-btn {
     background-image: url('/icon/player-skip-forward.svg');
+}
+
+.menu-btn {
+    background-image: url('/icon/menu.svg');
+}
+
+.volume-btn {
+    background-image: url('/icon/volume.svg');
 }
 
 .MusicPlay:hover {
