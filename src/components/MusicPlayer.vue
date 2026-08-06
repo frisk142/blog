@@ -1,7 +1,7 @@
 <template>
 <div class="MusicPlay">
   <div class="music-icon">
-    <div class="menu-btn"></div>
+    <div class="menu-btn" @click="showPlaylist"></div>
     <div class="play-skip-back-btn" @click="prevSong"></div>
     <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
     <div class="play-skip-forward-btn" @click="nextsong"></div>
@@ -45,6 +45,7 @@ const duration = ref(0)  // 总时长
 const volume = ref(0.8)  // 音量
 const currenSongIndex = ref(0)  //歌曲索引
 const songsList = ref(songs)  // 歌曲列表
+const Playlist = ref(false)  // 播放列表
 
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
@@ -54,6 +55,10 @@ const progress = computed(() => {
     if (duration.value === 0) return 0
     return (currentTime.value / duration.value) * 100
 })
+ 
+const showPlaylist = () => {
+  Playlist.value = !Playlist.value
+}
 
 //播放与暂停
 const toggleplay = () => { 
@@ -130,6 +135,7 @@ const nextsong = () => {
 //     const secs = Math.floor(seconds % 60)
 //     return `${mins}: ${secs.toString().padStart(0,'0')}`
 // }
+
 
 // 音频测试源
 onMounted(() => {

@@ -4,5 +4,12 @@ export const songs = [
         title: "Color Your Night",
         artist: "Atlus Sound Team",
         src: "public/songs/ColorYourNight.mp3",
+    },
+
+    {
+        id:2,
+        title: "Starry Sea",
+        artist: "Aqu3ra",
+        src: "public/songs/StarrySea.mp3",
     }
 ]

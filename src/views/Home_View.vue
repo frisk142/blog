@@ -49,7 +49,7 @@ const biliLInkCardconfig = {
   height: '20px',
   iconUrl: '/icon/bilibili.ico',
   to: ProFile.bilibiliUrl,
-  target: '_blank',
+  target: '_blank',  
   marginRight: '10px',
 }
 
