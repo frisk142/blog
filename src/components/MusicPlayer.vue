@@ -8,6 +8,16 @@
     <div class="volume-btn"></div>
   </div>
 
+  <div v-if="Playlist" class="playlist-overlay">
+    <div 
+    v-for="song in songsList"
+    :key="song.id"
+    class="playlist-item"
+    @click="playSong(song)"
+  >
+  <span>{{ song.title }}</span>
+   <span class="artist">{{ song.artist }}</span>
+
   <div class="music-progress"></div>
 </div>
 </template>
@@ -59,6 +69,18 @@ const progress = computed(() => {
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
 }
+
+//歌曲加载
+onMounted(() => {
+  audio.value = new Audio(currentSong.value.src)
+  audio.value.volume = volume.value
+
+  if (songsList.value.length > 0) {
+    const fristsong = songsList.value[0]
+    audio.value.src = fristsong.src
+    currenSongIndex.value = 0
+  }
+})
 
 //播放与暂停
 const toggleplay = () => { 
@@ -137,11 +159,6 @@ const nextsong = () => {
 // }
 
 
-// 音频测试源
-onMounted(() => {
-  audio.value = new Audio(currentSong.value.src)
-  audio.value.volume = volume.value
-})
 
 </script>
 
@@ -191,6 +208,31 @@ onMounted(() => {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+.playlist-overlay {
+    position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 8px 0;
+  z-index: 10;
+}
+
+.playlist-item {
+  padding: 8px 16px;
+  color: #ddd;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+
+}
+
 .play-skip-back-btn {
     background-image: url('/icon/player-skip-back.svg');
 }
@@ -214,19 +256,7 @@ onMounted(() => {
     transform: scale(1.05);
 }
 
-.Playbtn:hover {
-  background-color: rgba(0, 255, 255, 0.9);
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
-  transform: scale(1.05);
-}
-
-.play-skip-back-btn:hover {
-  background-color: rgba(0, 255, 255, 0.9);
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
-  transform: scale(1.05);
-}
-
-.play-skip-forward-btn:hover {
+.Playbtn:hover, .play-skip-back-btn:hover, .play-skip-forward-btn:hover {
   background-color: rgba(0, 255, 255, 0.9);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);

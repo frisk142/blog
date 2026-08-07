@@ -59,7 +59,7 @@ const githubLinkconfig = {
   width: '20px',
   height: '20px',
   iconUrl: '/icon/github.svg',
-  to: ProFile.github,
+  to: ProFile.githubUrl,
   target: '_blank'
 
 }

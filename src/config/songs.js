@@ -8,7 +8,7 @@ export const songs = [
 
     {
         id:2,
-        title: "Starry Sea",
+        title: "星降る海",
         artist: "Aqu3ra",
         src: "public/songs/StarrySea.mp3",
     }
