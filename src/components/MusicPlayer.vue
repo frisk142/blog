@@ -1,5 +1,10 @@
 <template>
 <div class="MusicPlay">
+  <div class="song-info">
+    <div class="song-title">{{ currentSong?.title || '未选择歌曲' }}</div>
+  </div>
+
+
   <div class="music-icon">
     <div class="menu-btn" @click="showPlaylist"></div>
     <div class="play-skip-back-btn" @click="prevSong"></div>
@@ -58,6 +63,7 @@ const volume = ref(0.8)  // 音量
 const currenSongIndex = ref(0)  //
 const songsList = ref(songs)  // 歌曲列表
 const Playlist = ref(false)  // 播放列表
+const songname = ref('')
 
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
@@ -85,6 +91,7 @@ onMounted(() => {
     isPlaying.value = true
   }
 })
+
 
 //播放与暂停
 const toggleplay = () => { 
@@ -235,6 +242,20 @@ const nextsong = () => {
   display: flex;
   justify-content: space-between;
 
+}
+
+.song-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.song-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
 }
 
 .play-skip-back-btn {
