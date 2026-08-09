@@ -17,6 +17,8 @@
   >
   <span>{{ song.title }}</span>
    <span class="artist">{{ song.artist }}</span>
+    </div>
+  </div>
 
   <div class="music-progress"></div>
 </div>
@@ -53,7 +55,7 @@ const isPlaying = ref(false) // 播放
 const currentTime = ref(0)  // 播放时长
 const duration = ref(0)  // 总时长
 const volume = ref(0.8)  // 音量
-const currenSongIndex = ref(0)  //歌曲索引
+const currenSongIndex = ref(0)  //
 const songsList = ref(songs)  // 歌曲列表
 const Playlist = ref(false)  // 播放列表
 
@@ -79,6 +81,8 @@ onMounted(() => {
     const fristsong = songsList.value[0]
     audio.value.src = fristsong.src
     currenSongIndex.value = 0
+    audio.value.play()
+    isPlaying.value = true
   }
 })
 
