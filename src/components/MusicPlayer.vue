@@ -1,16 +1,15 @@
 <template>
-<div class="MusicPlay">
+<div class="MusicPlay" :style="dynamicStyle">
   <div class="song-info">
     <div class="song-title">{{ currentSong?.title || '未选择歌曲' }}</div>
   </div>
-
 
   <div class="music-icon">
     <div class="menu-btn" @click="showPlaylist"></div>
     <div class="play-skip-back-btn" @click="prevSong"></div>
     <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
     <div class="play-skip-forward-btn" @click="nextsong"></div>
-    <div class="volume-btn"></div>
+    <div class="volume-btn" @click="showVolumeBar"></div>
   </div>
 
   <div v-if="Playlist" class="playlist-overlay">
@@ -21,12 +20,24 @@
     @click="playSong(song)"
   >
   <span>{{ song.title }}</span>
-   <span class="artist">{{ song.artist }}</span>
     </div>
+  </div>
+
+  <div v-if="volumebar" class="volume-slider-container">
+   <input 
+   type="range" 
+   min="0" 
+   max="1" 
+   step="0.01"
+   :value="volume"
+   @input="adjustVolume"
+   class="volume-slider"
+  />
   </div>
 
   <div class="music-progress"></div>
 </div>
+
 </template>
 
 <script setup>
@@ -43,6 +54,7 @@ const props = defineProps({
   width: {type: String, default: ''},
   height: {type: String, default: ''}
 })
+
 const dynamicStyle = computed(() => ({
   position: props.position,
   top: props.top,
@@ -63,7 +75,8 @@ const volume = ref(0.8)  // 音量
 const currenSongIndex = ref(0)  //
 const songsList = ref(songs)  // 歌曲列表
 const Playlist = ref(false)  // 播放列表
-const songname = ref('')
+const volumebar = ref(false) 
+
 
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
@@ -76,6 +89,11 @@ const progress = computed(() => {
  
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
+}
+
+const showVolumeBar = () => {
+  volumebar.value = !volumebar.value
+  console.log('showVolumeBar', volumebar.value)
 }
 
 //歌曲加载
@@ -152,14 +170,14 @@ const nextsong = () => {
 //     }
 // }
 
-// // 调整音量
-// const adjustVolume = (event) => {
-//     const val = parseFloat(event.target.value)
-//     volume.value = val
-//     if (audio.value) {
-//         audio.value.volume = val
-//     } 
-// }
+// 调整音量
+const adjustVolume = (event) => {
+    const val = parseFloat(event.target.value)
+    volume.value = val
+    if (audio.value) {
+        audio.value.volume = val
+    } 
+}
 
 // // 格式化时间
 // const formatTime = (seconds) => {
@@ -170,12 +188,12 @@ const nextsong = () => {
 // }
 
 
-
 </script>
 
 <style scoped>
 
 .MusicPlay{
+  position: relative;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   border-radius: 32px;
@@ -220,7 +238,7 @@ const nextsong = () => {
 }
 
 .playlist-overlay {
-    position: absolute;
+  position: absolute;
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
@@ -241,7 +259,6 @@ const nextsong = () => {
   transition: background 0.2s;
   display: flex;
   justify-content: space-between;
-
 }
 
 .song-info{
@@ -258,10 +275,45 @@ const nextsong = () => {
   color: #fff;
 }
 
+
+.volume-slider-container {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  z-index: 20;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width:12px;
+  height:12px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
 .play-skip-back-btn {
     background-image: url('/icon/player-skip-back.svg');
 }
-
 
 .play-skip-forward-btn {
     background-image: url('/icon/player-skip-forward.svg');
@@ -281,7 +333,7 @@ const nextsong = () => {
     transform: scale(1.05);
 }
 
-.Playbtn:hover, .play-skip-back-btn:hover, .play-skip-forward-btn:hover {
+.Playbtn:hover, .play-skip-back-btn:hover, .play-skip-forward-btn:hover, .menu-btn:hover, .volume-btn:hover {
   background-color: rgba(0, 255, 255, 0.9);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);
