@@ -9,7 +9,21 @@
     <div class="play-skip-back-btn" @click="prevSong"></div>
     <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
     <div class="play-skip-forward-btn" @click="nextsong"></div>
-    <div class="volume-btn" @click="showVolumeBar"></div>
+
+    <div class="volume-btn" @click="showVolumeBar">
+      <div v-if="volumebar" class="volume-slider-container">
+        <input 
+        type="range" 
+        min="0" 
+        max="1" 
+        step="0.01"
+        :value="volume"
+        @input="adjustVolume"
+        class="volume-slider"
+       />
+    </div>
+
+   </div>
   </div>
 
   <div v-if="Playlist" class="playlist-overlay">
@@ -23,17 +37,6 @@
     </div>
   </div>
 
-  <div v-if="volumebar" class="volume-slider-container">
-   <input 
-   type="range" 
-   min="0" 
-   max="1" 
-   step="0.01"
-   :value="volume"
-   @input="adjustVolume"
-   class="volume-slider"
-  />
-  </div>
 
   <div class="music-progress"></div>
 </div>
@@ -75,7 +78,7 @@ const volume = ref(0.8)  // 音量
 const currenSongIndex = ref(0)  //
 const songsList = ref(songs)  // 歌曲列表
 const Playlist = ref(false)  // 播放列表
-const volumebar = ref(false) 
+const volumebar = ref(false)  // 音量条
 
 
 const currentSong = computed(() => {
@@ -89,6 +92,7 @@ const progress = computed(() => {
  
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
+  console.log('showPlaylist', Playlist.value)
 }
 
 const showVolumeBar = () => {
@@ -105,8 +109,6 @@ onMounted(() => {
     const fristsong = songsList.value[0]
     audio.value.src = fristsong.src
     currenSongIndex.value = 0
-    audio.value.play()
-    isPlaying.value = true
   }
 })
 
@@ -231,10 +233,11 @@ const adjustVolume = (event) => {
 
 .music-progress {
   display: flex;
-  width: 320px;
+  width: 300px;
   height: 10px;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.5);
+
 }
 
 .playlist-overlay {
@@ -277,11 +280,12 @@ const adjustVolume = (event) => {
 
 
 .volume-slider-container {
+  transform: rotate(-90deg);
   position: absolute;
-  bottom: 80px;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.7); 
   backdrop-filter: blur(8px);
   padding: 12px 16px;
   border-radius: 12px;
@@ -297,12 +301,14 @@ const adjustVolume = (event) => {
   height: 4px;
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.3);
+  transition: rotate(-90deg);
   outline: none;
   appearance: none;
   -webkit-appearance: none;
 }
 
 .volume-slider::-webkit-slider-thumb {
+  writing-mode: bt-lr;
   -webkit-appearance: none;
   width:12px;
   height:12px;

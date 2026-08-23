@@ -11,5 +11,12 @@ export const songs = [
         title: "星降る海",
         artist: "Aqu3ra",
         src: "public/songs/StarrySea.mp3",
+    },
+
+    {
+        id:3,
+        title: "fish in the pool",
+        artist: "ヘクとパスカル",
+        src: "public/songs/fish_in_the_pool.mp3"
     }
 ]
