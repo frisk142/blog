@@ -38,7 +38,15 @@
   </div>
 
 
-  <div class="music-progress"></div>
+  <div class="music-progress">
+    <span class="Time-current">{{ formatTime(currentTime.value) }}</span>
+    <input
+    type="range"
+    min="0"
+    max="durotion"
+    />
+    <span class="Time-duration ">{{ formatTime(duration.value) }}</span>
+  </div>
 </div>
 
 </template>
@@ -81,6 +89,18 @@ const Playlist = ref(false)  // 播放列表
 const volumebar = ref(false)  // 音量条
 
 
+
+
+onMounted(() => {
+  audio.value.addEventListener('loadmetadata', () => {
+    duration.value = audio.value.duration
+  })
+  audio.value.addEventListener('timeupdate', () => {
+    currentTime.value = audio.value.currentTime
+  })
+})
+
+
 const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
 })
@@ -89,7 +109,7 @@ const progress = computed(() => {
     if (duration.value === 0) return 0
     return (currentTime.value / duration.value) * 100
 })
- 
+
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
   console.log('showPlaylist', Playlist.value)
@@ -181,13 +201,13 @@ const adjustVolume = (event) => {
     } 
 }
 
-// // 格式化时间
-// const formatTime = (seconds) => {
-//     if (! seconds || isNaN(seconds)) return '0.00'
-//     const mins = Math.floor(seconds / 60)
-//     const secs = Math.floor(seconds % 60)
-//     return `${mins}: ${secs.toString().padStart(0,'0')}`
-// }
+// 格式化时间
+const formatTime = (seconds) => {
+    if (! seconds || isNaN(seconds)) return '0.00'
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}: ${secs.toString().padStart(0,'0')}`
+}
 
 
 </script>
@@ -316,6 +336,14 @@ const adjustVolume = (event) => {
   background: #fff;
   cursor: pointer;
 }
+
+.Time-courrent, .Time-duration {
+  font-size: 12px;
+  color: #fff;
+  min-width: 36px;
+  text-align: center;
+}
+
 
 .play-skip-back-btn {
     background-image: url('/icon/player-skip-back.svg');
