@@ -43,7 +43,11 @@
     <input
     type="range"
     min="0"
-    max="durotion"
+    :max="duration.value"
+    step="1"
+    class="progress-slider"
+    :value="progress"
+    @input="seekTo"
     />
     <span class="Time-duration ">{{ formatTime(duration.value) }}</span>
   </div>
@@ -92,12 +96,14 @@ const volumebar = ref(false)  // 音量条
 
 
 onMounted(() => {
-  audio.value.addEventListener('loadmetadata', () => {
-    duration.value = audio.value.duration
-  })
-  audio.value.addEventListener('timeupdate', () => {
-    currentTime.value = audio.value.currentTime
-  })
+  if (audio.value){
+    audio.value.addEventListener('loadmetadata', () => {
+       duration.value = audio.value.duration
+     })
+    audio.value.addEventListener('timeupdate', () => {
+      currentTime.value = audio.value.currentTime
+    })
+  }
 })
 
 
@@ -130,6 +136,7 @@ onMounted(() => {
     audio.value.src = fristsong.src
     currenSongIndex.value = 0
   }
+  console.log('audio loaded', audio.value.src)
 })
 
 
@@ -158,6 +165,7 @@ const playSong = (song) => {
         audio.value.play()
         isPlaying.value = true
     }
+    console.log('playSong', song.title, currenSongIndex.value)
 }
 
 //上一曲
@@ -170,6 +178,7 @@ const prevSong = () => {
         audio.value.play()
         isPlaying.value = true
     }
+    console.log('prevSong', currentSong.value.title, currenSongIndex.value)
 }
 
 //下一曲
@@ -182,15 +191,17 @@ const nextsong = () => {
         audio.value.play()
         isPlaying.value = true
     }
+    console.log('nextsong', currentSong.value.title, currenSongIndex.value)
 }
 
-// // 跳转到指定进度
-// const seekTo = (event) => {
-//     const val = parseFloat(event.target.value)
-//     if (audio.value && duration.value > 0) {
-//         audio.value.currentTime = (val / 100) * duration.value
-//     }
-// }
+// 跳转到指定进度
+const seekTo = (event) => {
+    const val = parseFloat(event.target.value)
+    if (audio.value && duration.value > 0) {
+        audio.value.currentTime = (val / 100) * duration.value
+    }
+    console.log('seekTo', val, audio.value.currentTime)
+}
 
 // 调整音量
 const adjustVolume = (event) => {
@@ -199,6 +210,7 @@ const adjustVolume = (event) => {
     if (audio.value) {
         audio.value.volume = val
     } 
+    console.log('adjustVolume', val, audio.value.volume)
 }
 
 // 格式化时间
@@ -254,10 +266,19 @@ const formatTime = (seconds) => {
 .music-progress {
   display: flex;
   width: 300px;
-  height: 10px;
+  gap: 12px;
+  align-items: center;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.5);
 
+}
+
+.progress-slider{
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
 }
 
 .playlist-overlay {
