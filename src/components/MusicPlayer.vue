@@ -97,11 +97,13 @@ const volumebar = ref(false)  // 音量条
 
 onMounted(() => {
   if (audio.value){
-    audio.value.addEventListener('loadmetadata', () => {
+    audio.value.addEventListener('loadedmetadata', () => {
        duration.value = audio.value.duration
+       console.log('metadata loaded', duration.value)
      })
     audio.value.addEventListener('timeupdate', () => {
       currentTime.value = audio.value.currentTime
+      console.log('timeupdate', currentTime.value)
     })
   }
 })
@@ -269,7 +271,6 @@ const formatTime = (seconds) => {
   gap: 12px;
   align-items: center;
   border-radius: 50px;
-  background-color: rgba(255, 255, 255, 0.5);
 
 }
 
@@ -358,7 +359,7 @@ const formatTime = (seconds) => {
   cursor: pointer;
 }
 
-.Time-courrent, .Time-duration {
+.Time-current, .Time-duration {
   font-size: 12px;
   color: #fff;
   min-width: 36px;
