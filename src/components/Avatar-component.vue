@@ -22,7 +22,7 @@ const props = defineProps({
 
 const dynamicStyle = computed(() => ({
     position: props.position,
-    top: props.top,
+    top: props.top, 
     left: props.left,
     right: props.right,
     bottom: props.bottom,

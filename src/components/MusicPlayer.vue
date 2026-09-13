@@ -39,7 +39,7 @@
 
 
   <div class="music-progress">
-    <span class="Time-current">{{ formatTime(currentTime.value) }}</span>
+    <span class="Time-current">{{ formatTime(currentTime) }}</span>
     <input
     type="range"
     min="0"
@@ -49,7 +49,7 @@
     :value="progress"
     @input="seekTo"
     />
-    <span class="Time-duration ">{{ formatTime(duration.value) }}</span>
+    <span class="Time-duration ">{{ formatTime(duration) }}</span>
   </div>
 </div>
 
@@ -93,19 +93,33 @@ const Playlist = ref(false)  // 播放列表
 const volumebar = ref(false)  // 音量条
 
 
-
-
 onMounted(() => {
-  if (audio.value){
-    audio.value.addEventListener('loadedmetadata', () => {
-       duration.value = audio.value.duration
-       console.log('metadata loaded', duration.value)
-     })
-    audio.value.addEventListener('timeupdate', () => {
-      currentTime.value = audio.value.currentTime
-      console.log('timeupdate', currentTime.value)
-    })
+  audio.value = new Audio()
+  audio.value.volume = volume.value
+
+  // 绑定所有事件
+  audio.value.addEventListener("canplay", () => {
+    console.log('canplay')
+  })
+
+  audio.value.addEventListener("loadedmetadata", () => {
+    duration.value = audio.value.duration
+    console.log('loadmetadata', duration.value)
+  })
+
+  audio.value.addEventListener("timeupdate", () => {
+    currentTime.value = audio.value.currentTime
+    console.log('timeupdate', currentTime.value, "paused:", audio.value.paused, "loaded:", duration.value)
+  })
+
+  if (songsList.value.length > 0){
+    audio.value.src = songsList.value[0].src
+    currenSongIndex.value = 0
   }
+
+  audio.value.load()
+  console.log('audio loaded', audio.value.src)
+
 })
 
 
@@ -116,6 +130,7 @@ const currentSong = computed(() => {
 const progress = computed(() => {
     if (duration.value === 0) return 0
     return (currentTime.value / duration.value) * 100
+
 })
 
 const showPlaylist = () => {
@@ -128,20 +143,6 @@ const showVolumeBar = () => {
   console.log('showVolumeBar', volumebar.value)
 }
 
-//歌曲加载
-onMounted(() => {
-  audio.value = new Audio(currentSong.value.src)
-  audio.value.volume = volume.value
-
-  if (songsList.value.length > 0) {
-    const fristsong = songsList.value[0]
-    audio.value.src = fristsong.src
-    currenSongIndex.value = 0
-  }
-  console.log('audio loaded', audio.value.src)
-})
-
-
 //播放与暂停
 const toggleplay = () => { 
   console.log('toggleplay')
@@ -149,9 +150,11 @@ const toggleplay = () => {
     if (isPlaying.value){
         audio.value.pause()
         console.log('暂停')
+        console.log('currentTime:', currentTime)
     } else {
         audio.value.play() 
         console.log('播放')
+
     }
     isPlaying.value = !isPlaying.value
 }
@@ -209,7 +212,7 @@ const seekTo = (event) => {
 const adjustVolume = (event) => {
     const val = parseFloat(event.target.value)
     volume.value = val
-    if (audio.value) {
+    if (audio.value) {  
         audio.value.volume = val
     } 
     console.log('adjustVolume', val, audio.value.volume)
@@ -282,6 +285,16 @@ const formatTime = (seconds) => {
   border-radius: 2px;
 }
 
+.progress-slider::-webkit-slider-thumb {
+  writing-mode: bt-lr;
+  -webkit-appearance: none;
+  width:12px;
+  height:12px;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.9);
+  cursor: pointer;
+}
+
 .playlist-overlay {
   position: absolute;
   top: 60px;
@@ -290,7 +303,7 @@ const formatTime = (seconds) => {
   width: 200px;
   max-height: 200px;
   overflow-y: auto;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 8px 0;
@@ -327,7 +340,7 @@ const formatTime = (seconds) => {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.7); 
+  background: rgba(0,0,0,0.5); 
   backdrop-filter: blur(8px);
   padding: 12px 16px;
   border-radius: 12px;
