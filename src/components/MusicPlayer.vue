@@ -43,7 +43,7 @@
     <input
     type="range"
     min="0"
-    :max="duration.value"
+    :max="duration"
     step="1"
     class="progress-slider"
     :value="progress"

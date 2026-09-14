@@ -5,7 +5,12 @@
       <router-link to = "/about">关于我</router-link>
       <router-link to = "/test">组件测试页</router-link>
     </nav>
-    <router-view />
+    
+    <router-view v-slot="{ Component }">
+      <keep-alive include="TestView">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 

@@ -7,7 +7,10 @@
 <script setup>
 import MusicPlayer from '@/components/MusicPlayer.vue';
 
-
+defineOptions({
+  name: 'TestView'
+})
+console.log('TestView组件已加载');
 
 const MusicPlayerConfig =  {
     position: 'fixed',
@@ -15,8 +18,6 @@ const MusicPlayerConfig =  {
     height: '200px',
     width: '350px',
     right: '200px'
-
-
 }
 </script>
 
