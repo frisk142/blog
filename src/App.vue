@@ -7,12 +7,13 @@
     </nav>
     
     <router-view v-slot="{ Component }">
-      <keep-alive include="TestView">
+      <keep-alive include="HomeView">
         <component :is="Component" />
       </keep-alive>
     </router-view>
   </div>
 </template>
+
 
 <style>
 *{

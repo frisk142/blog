@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted, onUnmounted, watch} from 'vue'
+import {ref, computed, onMounted,} from 'vue'
 import {songs} from '@/config/songs'
 
 const props = defineProps({

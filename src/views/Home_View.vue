@@ -13,6 +13,8 @@
       </div>
       </div>
     </BlogLinecard>
+
+    <MusicPlayer v-bind="MusicPlayerConfig"/>
   </div>
 </template>
 
@@ -22,6 +24,12 @@ import AvatarComponent from '../components/Avatar-component.vue';
 import BlogLinecard from '../components/Blog-Linecard.vue';
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue';
+import MusicPlayer from '@/components/MusicPlayer.vue';
+
+defineOptions({
+  name: 'HomeView'
+})
+
 
 
 const avatarconfig = {
@@ -61,9 +69,15 @@ const githubLinkconfig = {
   iconUrl: '/icon/github.svg',
   to: ProFile.githubUrl,
   target: '_blank'
-
 }
 
+const MusicPlayerConfig =  {
+    position: 'fixed',
+    top: '200px',
+    height: '175px',
+    width: '350px',
+    right: '200px'
+}
 
 </script>
 
