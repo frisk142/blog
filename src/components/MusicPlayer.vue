@@ -265,7 +265,7 @@ const formatTime = (seconds) => {
     border-radius: 100px;
     transition: all 0.5s ease;
     background-position: center;
-    padding: 6px;
+    padding: 6px; 
 }
 
 .music-progress {

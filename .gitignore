@@ -53,3 +53,5 @@ ProFile.js
 dist/
 dist-ssr/
 .vite/
+.vercel
+.env*
