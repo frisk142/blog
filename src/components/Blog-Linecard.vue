@@ -1,5 +1,5 @@
 <template>
-    <div class = "Blog-Linecard" :style="dynamicStyle">
+    <div class = "Blog-Linecard" :style="dynamicStyle" :class="{ hoverable: hoverable }">
     <slot></slot>
     </div>
 </template>
@@ -9,16 +9,20 @@ import {computed} from 'vue'
 
 const props = defineProps({
     position: {type: String, default:'static'},
+    margin: {type: String, default: 'static'},
     top: {type: String, default: 'static'},
     left: {type: String, default: 'static'},
-    right: {type: String, default: 'staic'},
-    bottom: {type: String, default: 'staic'},
-    zIndex: {type: String, default: 'staic'},
-    width: {type: String, default: 'staic'},
-    height: {type: String, default: 'staic'}
+    right: {type: String, default: 'static'},
+    bottom: {type: String, default: 'static'},
+    zIndex: {type: String, default: 'static'},
+    width: {type: String, default: 'static'},
+    height: {type: String, default: 'static'},
+    maxWidth: {type: String, default: 'static'},
+    hoverable: {type: Boolean, default: true}
 })
 const dynamicStyle = computed(() => ({
     position: props.position,
+    margin: props.margin,
     top: props.top,
     left: props.left,
     right: props.right,
@@ -26,6 +30,8 @@ const dynamicStyle = computed(() => ({
     zIndex: props.zIndex,
     width: props.width,
     height: props.height,
+    maxWidth: props.maxWidth,
+    hoverable: props.hoverable
 }))
 
 
@@ -38,16 +44,15 @@ const dynamicStyle = computed(() => ({
   border-radius: 32px;
   padding: 2rem;
   width: 90%;
-  max-width: 600px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   color: white;
   margin: 0 auto;
   cursor: pointer;
   transition: transform 0.2s ease;
-  display: inline-block;
+  display: block;
 }
 
-.Blog-Linecard:hover {
+.Blog-Linecard.hoverable:hover {
     border-color: rgba(255, 255, 255, 1);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     transform: scale(1.05);

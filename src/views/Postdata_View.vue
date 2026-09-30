@@ -1,16 +1,17 @@
 <template>
-    <div class="Article">
+    <BlogLinecard v-bind="BlogLinecardconfig">
       <div class="post-detail">
           <h1>{{ title }}</h1>
           <div class="content" v-html="htmlContent"></div>
       </div>
-    </div>
+    </BlogLinecard>
 </template>
 
 <script setup>
 import { ref, onMounted, } from 'vue'
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
+import BlogLinecard from '@/components/Blog-Linecard.vue'
 
 const route = useRoute()
 const md = new MarkdownIt()
@@ -25,6 +26,14 @@ onMounted(async () => {
     title.value = "test_file"
 
 })
+
+const BlogLinecardconfig = {
+    maxWidth: '420px',
+    position: 'relative',
+    zIndex: "999",
+    hoverable: false,
+    margin: "0 auto",
+}
 
 </script>
 
@@ -51,16 +60,6 @@ onMounted(async () => {
     border-radius: 4px;
 }
 
-.Article{
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto;
-    z-index: 999;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    border-radius: 32px;
-
-}
 
 
 </style>
