@@ -36,6 +36,7 @@ onMounted(async () => {
     padding: 2rem;
     color: rgba(0, 0, 0, 0.9);
     line-height: 1.8;
+    padding: 2rem, 1.5rem;
 }
 
 .content :deep(h1)
@@ -52,6 +53,8 @@ onMounted(async () => {
 
 .Article{
     position: relative;
+    max-width: 600px;
+    margin: 0 auto;
     z-index: 999;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);

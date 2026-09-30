@@ -77,7 +77,7 @@ nav {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   z-index: 999;
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
