@@ -1,21 +1,25 @@
 <template>
   <div class="page-bg">
-    <BlogLinecard v-bind="Linecardconfig">
-      <div class="profile-wrap">
-      <AvatarComponent v-bind="avatarconfig"/>
-        <div class="name-Format">
-          <h3>{{ ProFile.name }}</h3>
-          <p class="small-text">{{ ProFile.title }}</p>
-          <div class='link-group'>
-            <LinkCard v-bind="biliLInkCardconfig"/>
-            <LinkCard v-bind="githubLinkconfig"/>
+     <div class="home-layout">
+      <div class="row-a">
+       <BlogLinecard class="area-intro">
+        <div class="profile-wrap">
+          <AvatarComponent v-bind="avatarconfig"/>
+          <div class="name-Format">
+            <h3>{{ ProFile.name }}</h3>
+            <p class="small-text">{{ ProFile.title }}</p>
+            <div class='link-group'>
+             <LinkCard v-bind="biliLInkCardconfig"/>
+             <LinkCard v-bind="githubLinkconfig"/>
+            </div>
           </div>
-      </div>
-      </div>
-    </BlogLinecard>
+         </div>
+        </BlogLinecard>
 
-    <MusicPlayer v-bind="MusicPlayerConfig"/>
-  </div>
+       <musicPlayer />
+      </div>
+   </div>     
+ </div>
 </template>
 
 
@@ -30,8 +34,6 @@ defineOptions({
   name: 'HomeView'
 })
 
-
-
 const avatarconfig = {
   position: 'relative',
   zIndex: '999',
@@ -42,13 +44,13 @@ const avatarconfig = {
   borderRadius: '10%'
 }
 
-const Linecardconfig = {
-  position: 'fixed',
-  top: '200px',
-  left: '30px',
-  width: '500px',
-  height: '175px' 
-}
+// const Linecardconfig = {
+//   position: 'fixed',
+//   top: '200px',
+//   left: '30px',
+//   width: '500px',
+//   height: '175px' 
+// }
 
 const biliLInkCardconfig = {
   position: 'relative',
@@ -71,18 +73,18 @@ const githubLinkconfig = {
   target: '_blank'
 }
 
-const MusicPlayerConfig =  {
-    position: 'fixed',
-    top: '200px',
-    height: '175px',
-    width: '350px',
-    right: '200px'
-}
+// const MusicPlayerConfig =  {
+//     position: 'fixed',
+//     top: '200px',
+//     height: '175px',
+//     width: '350px',
+//     right: '200px'
+// }
 
 </script>
 
 
-<style>
+<style scoped>
  .page-bg{
   position: absolute;
   background-size: cover;
@@ -92,6 +94,38 @@ const MusicPlayerConfig =  {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
+ }
+
+.home-layout{
+  display:flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 120px 2rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+ .row{
+  display:grid;
+  gap: 1.5rem;
+
+ }
+
+ .row-a{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+ }
+
+ .row-b{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+ }
+
+ .row-c{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
  }
 
  .small-text{
@@ -111,7 +145,19 @@ const MusicPlayerConfig =  {
  }
 
  .name-Format{
-  position: block;
+  display: block;
  }
+
+@media (max-width: 768px) { 
+  .home-grid {
+    grid-template-areas:
+      "intro"
+      "music"
+      "posts"
+      "gallery";
+  grid-template-columns: 1fr;
+  padding: 120px 1rem 1rem;
+  }
+}
 
 </style>

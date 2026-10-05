@@ -8,16 +8,16 @@
 import {computed} from 'vue'
 
 const props = defineProps({
-    position: {type: String, default:'static'},
-    margin: {type: String, default: 'static'},
-    top: {type: String, default: 'static'},
-    left: {type: String, default: 'static'},
-    right: {type: String, default: 'static'},
-    bottom: {type: String, default: 'static'},
-    zIndex: {type: String, default: 'static'},
-    width: {type: String, default: 'static'},
-    height: {type: String, default: 'static'},
-    maxWidth: {type: String, default: 'static'},
+    position: {type: String, default:''},
+    margin: {type: String, default: ''},
+    top: {type: String, default: ''},
+    left: {type: String, default: ''},
+    right: {type: String, default: ''},
+    bottom: {type: String, default: ''},
+    zIndex: {type: String, default: ''},
+    width: {type: String, default: ''},
+    height: {type: String, default: ''},
+    maxWidth: {type: String, default: ''},
     hoverable: {type: Boolean, default: true}
 })
 const dynamicStyle = computed(() => ({
