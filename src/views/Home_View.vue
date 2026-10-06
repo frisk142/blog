@@ -127,16 +127,14 @@ const githubLinkconfig = {
   display: block;
  }
 
-@media (max-width: 768px) { 
-  .home-grid {
-    grid-template-areas:
-      "intro"
-      "music"
-      "posts"
-      "gallery";
-  grid-template-columns: 1fr;
-  padding: 120px 1rem 1rem;
+@media (max-width: 768px) {
+  home-layout {
+    padding: 100px 1rem 1rem;
   }
+  .row-a {grid-template-columns: 1fr;}
+  .row-b {grid-template-columns: 1fr;}
+  .row-c {grid-template-columns: 1fr;}
+  
 }
 
 </style>
