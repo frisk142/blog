@@ -44,14 +44,6 @@ const avatarconfig = {
   borderRadius: '10%'
 }
 
-// const Linecardconfig = {
-//   position: 'fixed',
-//   top: '200px',
-//   left: '30px',
-//   width: '500px',
-//   height: '175px' 
-// }
-
 const biliLInkCardconfig = {
   position: 'relative',
   zIndex: '999',
@@ -72,14 +64,6 @@ const githubLinkconfig = {
   to: ProFile.githubUrl,
   target: '_blank'
 }
-
-// const MusicPlayerConfig =  {
-//     position: 'fixed',
-//     top: '200px',
-//     height: '175px',
-//     width: '350px',
-//     right: '200px'
-// }
 
 </script>
 
@@ -106,11 +90,6 @@ const githubLinkconfig = {
 }
 
 
- .row{
-  display:grid;
-  gap: 1.5rem;
-
- }
 
  .row-a{
   display:grid;

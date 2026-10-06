@@ -46,7 +46,7 @@
     :max="duration"
     step="1"
     class="progress-slider"
-    :value="progress"
+    :value="currentTime"
     @input="seekTo"
     />
     <span class="Time-duration ">{{ formatTime(duration) }}</span>
@@ -127,12 +127,6 @@ const currentSong = computed(() => {
     return songsList.value[currenSongIndex.value] || null
 })
 
-const progress = computed(() => {
-    if (duration.value === 0) return 0
-    return (currentTime.value / duration.value) * 100
-
-})
-
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
   console.log('showPlaylist', Playlist.value)
@@ -201,11 +195,10 @@ const nextsong = () => {
 
 // 跳转到指定进度
 const seekTo = (event) => {
-    const val = parseFloat(event.target.value)
-    if (audio.value && duration.value > 0) {
-        audio.value.currentTime = (val / 100) * duration.value
-    }
-    console.log('seekTo', val, audio.value.currentTime)
+  const val = parseFloat(event.target.value)
+  if (audio.value) {
+    audio.value.currentTime = val
+  }
 }
 
 // 调整音量
