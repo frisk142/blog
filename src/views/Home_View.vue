@@ -2,7 +2,7 @@
   <div class="page-bg">
      <div class="home-layout">
       <div class="row-a">
-       <BlogLinecard class="area-intro">
+       <BlogLinecard>
         <div class="profile-wrap">
           <AvatarComponent v-bind="avatarconfig"/>
           <div class="name-Format">
@@ -18,8 +18,17 @@
 
        <musicPlayer />
       </div>
+      <div class="row-b">
+        <BlogLinecard class="ShowImages" fill style="padding: 0.25rem;">
+          <img src="../../public/images/01.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" />
+        </BlogLinecard>
+        <BlogLinecard class="blog" fill></BlogLinecard>
+        <BlogLinecard class="blogcard" fill></BlogLinecard>
+        <BlogLinecard class="blogcard-1" fill></BlogLinecard>
+      </div>
    </div>     
  </div>
+
 </template>
 
 
@@ -80,32 +89,45 @@ const githubLinkconfig = {
   background-attachment: fixed;
  }
 
-.home-layout{
+ .home-layout{
   display:flex;
   flex-direction: column;
   gap: 20px;
-  padding: 120px 2rem 2rem;
+  padding: 30px 2rem 2rem;
   max-width: 1000px;
   margin: 0 auto;
 }
-
-
-
  .row-a{
   display:grid;
   grid-template-columns: 2fr 1fr;
-  gap: 1.5rem;
  }
 
  .row-b{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "ShowImages blog blog"
+    "ShowImages blogcard blogcard-1";
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-rows: 180px 320px;
+  gap: 0.75rem;
  }
+
+ .row-b > * {
+  width: 100%;
+  height: 100%;
+}
 
  .row-c{
   display:grid;
   grid-template-columns: 1fr 1fr;
  }
+
+
+ .blogcard {grid-area: blogcard};
+ .ShowImages {grid-area: ShowImages};
+ .blog {grid-area: blog};
+ .blogcard-1 {grid-area: blogcard-1};
+
 
  .small-text{
   font-size: 10px;
@@ -128,7 +150,7 @@ const githubLinkconfig = {
  }
 
 @media (max-width: 768px) {
-  home-layout {
+  .home-layout {
     padding: 100px 1rem 1rem;
   }
   .row-a {grid-template-columns: 1fr;}

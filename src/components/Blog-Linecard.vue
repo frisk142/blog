@@ -1,5 +1,5 @@
 <template>
-    <div class = "Blog-Linecard" :style="dynamicStyle" :class="{ hoverable: hoverable }">
+    <div class = "Blog-Linecard" :style="dynamicStyle" :class="{ hoverable: hoverable,fill:fill }">
     <slot></slot>
     </div>
 </template>
@@ -18,7 +18,8 @@ const props = defineProps({
     width: {type: String, default: ''},
     height: {type: String, default: ''},
     maxWidth: {type: String, default: ''},
-    hoverable: {type: Boolean, default: true}
+    hoverable: {type: Boolean, default: true},
+    fill: { type: Boolean, default: false }, 
 })
 const dynamicStyle = computed(() => ({
     position: props.position,
@@ -31,7 +32,7 @@ const dynamicStyle = computed(() => ({
     width: props.width,
     height: props.height,
     maxWidth: props.maxWidth,
-    hoverable: props.hoverable
+    padding: props.padding,
 }))
 
 
@@ -56,5 +57,11 @@ const dynamicStyle = computed(() => ({
     border-color: rgba(255, 255, 255, 1);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     transform: scale(1.05);
+}
+
+.Blog-Linecard.fill {
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 </style>
