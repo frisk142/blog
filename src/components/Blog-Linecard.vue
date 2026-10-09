@@ -61,6 +61,7 @@ const dynamicStyle = computed(() => ({
 
 .Blog-Linecard.fill {
   width: 100%;
+  height: 100%;
   max-width: none;
   margin: 0;
 }

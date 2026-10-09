@@ -15,19 +15,35 @@
           </div>
          </div>
         </BlogLinecard>
-
        <musicPlayer />
       </div>
+
       <div class="row-b">
-        <BlogLinecard class="ShowImages" fill style="padding: 0.25rem;">
-          <img src="../../public/images/01.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" />
-        </BlogLinecard>
-        <BlogLinecard class="blog" fill></BlogLinecard>
-        <BlogLinecard class="blogcard" fill></BlogLinecard>
-        <BlogLinecard class="blogcard-1" fill></BlogLinecard>
+       <div class = "ShowImages">
+         <BlogLinecard fill style = "padding: 0.25rem;">
+           <img src="../../public/images/01.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+         </BlogLinecard>
+       </div>
+
+       <div class="row-b-right">
+        <div class="blog">
+         <BlogLinecard fill style = "padding: 0.25rem;">
+          <img src="../../public/images/03.jpg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+         </BlogLinecard> 
+        </div>
+       </div>
+<!-- 
+       <div class="blogcard">
+        <BlogLinecard fill></BlogLinecard>
+       </div>
+
+       <div class="blogcard-1">
+        <BlogLinecard  fill></BlogLinecard>
+       </div> -->
+
       </div>
-   </div>     
- </div>
+    </div> 
+  </div>
 
 </template>
 
@@ -107,8 +123,8 @@ const githubLinkconfig = {
   grid-template-areas: 
     "ShowImages blog blog"
     "ShowImages blogcard blogcard-1";
-  grid-template-columns: 1.2fr 1fr 1fr;
-  grid-template-rows: 180px 320px;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: ;
   gap: 0.75rem;
  }
 
@@ -122,12 +138,13 @@ const githubLinkconfig = {
   grid-template-columns: 1fr 1fr;
  }
 
+ .row-b-right{
+  display:grid;
+  grid-template-columns: 4fr;
+  grid-template-rows: 180px;
+  grid-column: 2 / 4;
 
- .blogcard {grid-area: blogcard};
- .ShowImages {grid-area: ShowImages};
- .blog {grid-area: blog};
- .blogcard-1 {grid-area: blogcard-1};
-
+ }
 
  .small-text{
   font-size: 10px;
@@ -156,7 +173,15 @@ const githubLinkconfig = {
   .row-a {grid-template-columns: 1fr;}
   .row-b {grid-template-columns: 1fr;}
   .row-c {grid-template-columns: 1fr;}
-  
 }
+
+</style>
+
+<style>
+ .blogcard {grid-area: blogcard};
+ .ShowImages {grid-area: ShowImages};
+ .blog {grid-area: blog};
+ .blogcard-1 {grid-area: blogcard-1};
+ .row-b-right {grid-area: row-b-right};
 
 </style>

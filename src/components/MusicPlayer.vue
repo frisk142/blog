@@ -109,7 +109,7 @@ onMounted(() => {
 
   audio.value.addEventListener("timeupdate", () => {
     currentTime.value = audio.value.currentTime
-    console.log('timeupdate', currentTime.value, "paused:", audio.value.paused, "loaded:", duration.value)
+    // console.log('timeupdate', currentTime.value, "paused:", audio.value.paused, "loaded:", duration.value)
   })
 
   if (songsList.value.length > 0){
@@ -198,6 +198,7 @@ const seekTo = (event) => {
   const val = parseFloat(event.target.value)
   if (audio.value) {
     audio.value.currentTime = val
+    console.log('seekTo', val, audio.value.currentTime)
   }
 }
 
