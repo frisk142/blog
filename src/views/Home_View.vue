@@ -22,20 +22,20 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem;">
-           <img src="../../public/images/01.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+           <img src="/src/assets/show_images/ShowImages-5.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
          <BlogLinecard fill style = "padding: 0.25rem;">
-          <img src="../../public/images/03.jpg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+          <img src="/src/assets/blog_Images/blog-5.jpg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
-        <BlogLinecard fill>
-          <img src="../../public/images/02.jpg" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+        <BlogLinecard fill style="padding: 0.25rem">
+          <img src="/src/assets/blog_Images/blog-4.jpg" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
         </BlogLinecard>
        </div>
       </div>
@@ -63,10 +63,22 @@ import MusicPlayer from '@/components/MusicPlayer.vue';
 
 const contentRightScroll = ref(null);
 
+
 defineOptions({
   name: 'HomeView'
 })
 
+
+// const BlogImages = () => {
+//   const modules = import.meta.glob("@/src/assets/blog-images/*{png,jpg,jpeg,webp}",{ eager: true })
+//   return Object.values(modules).map(item => item.default)
+//   console
+// }
+
+// const ShowImages = () => {
+//   const modules = import.meta.glob("@/src/assets/show-images/*{png,jpg,jpeg,webp}",{ eager: true })
+//   const ShowImg = Object.values(modules).map(item => item.default)
+// }
 
 const wheelHandler = (event) => {
   if (contentRightScroll.value) {
@@ -150,8 +162,22 @@ const githubLinkconfig = {
     "ShowImages blog blog"
     "ShowImages blogcard blogcard-1";
   grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 300px;
   gap: 0.75rem;
  }
+
+ 
+ .row-b-right{
+  display:grid;
+  grid-template-columns: 4fr;
+  grid-template-areas: 
+    "blog"
+    "blogcard";
+  grid-template-rows: 145px 145px; 
+  grid-column: 2 / 4;
+  gap: 10px;
+ }
+
 
  .row-b > * {
   width: 100%;
@@ -162,17 +188,6 @@ const githubLinkconfig = {
   display:grid;
   grid-template-columns: 1fr 1fr;
  }
-
- .row-b-right{
-  display:grid;
-  grid-template-columns: 4fr;
-  grid-template-areas: 
-    "blog"
-    "blogcard";
-  grid-template-rows: 120px;
-  grid-column: 2 / 4;
- }
-
  .small-text{
   font-size: 10px;
  }
