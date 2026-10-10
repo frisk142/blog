@@ -1,4 +1,5 @@
 <template>
+ <div ref="contentRightScroll" @wheel="wheelHandler" class="scrollable">
   <div class="page-bg">
      <div class="home-layout">
       <div class="row-a">
@@ -31,12 +32,14 @@
           <img src="../../public/images/03.jpg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
-       </div>
-<!-- 
-       <div class="blogcard">
-        <BlogLinecard fill></BlogLinecard>
-       </div>
 
+       <div class="blogcard">
+        <BlogLinecard fill>
+          <img src="../../public/images/02.jpg" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+        </BlogLinecard>
+       </div>
+      </div>
+<!-- 
        <div class="blogcard-1">
         <BlogLinecard  fill></BlogLinecard>
        </div> -->
@@ -44,20 +47,34 @@
       </div>
     </div> 
   </div>
+ </div>
 
 </template>
 
 
 <script setup>
+import { ref } from 'vue';
 import AvatarComponent from '../components/Avatar-component.vue';
 import BlogLinecard from '../components/Blog-Linecard.vue';
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue';
 import MusicPlayer from '@/components/MusicPlayer.vue';
 
+
+const contentRightScroll = ref(null);
+
 defineOptions({
   name: 'HomeView'
 })
+
+
+const wheelHandler = (event) => {
+  if (contentRightScroll.value) {
+    contentRightScroll.value.scrollTop += event.deltaY;
+    console.log('scrollTop:', contentRightScroll.value.scrollTop);
+    event.preventDefault();
+  }
+};
 
 const avatarconfig = {
   position: 'relative',
@@ -95,7 +112,6 @@ const githubLinkconfig = {
 
 <style scoped>
  .page-bg{
-  position: absolute;
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
@@ -103,6 +119,16 @@ const githubLinkconfig = {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
+ }
+
+ .scrollable {
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100vw;
+ }
+
+ ::-webkit-scrollbar-track{
+  background-color: rgba(255,255,255,0.1);
  }
 
  .home-layout{
@@ -124,7 +150,6 @@ const githubLinkconfig = {
     "ShowImages blog blog"
     "ShowImages blogcard blogcard-1";
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: ;
   gap: 0.75rem;
  }
 
@@ -141,9 +166,11 @@ const githubLinkconfig = {
  .row-b-right{
   display:grid;
   grid-template-columns: 4fr;
-  grid-template-rows: 180px;
+  grid-template-areas: 
+    "blog"
+    "blogcard";
+  grid-template-rows: 120px;
   grid-column: 2 / 4;
-
  }
 
  .small-text{
