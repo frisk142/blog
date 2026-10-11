@@ -22,20 +22,20 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem;">
-           <img src="/src/assets/show_images/ShowImages-5.jpg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+           <img :src="ShowImg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
          <BlogLinecard fill style = "padding: 0.25rem;">
-          <img src="/src/assets/blog_Images/blog-5.jpg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+          <img :src="BlogImg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem">
-          <img src="/src/assets/blog_Images/blog-4.jpg" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+          <img :src="BlogImgOne" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
         </BlogLinecard>
        </div>
       </div>
@@ -62,8 +62,12 @@ import MusicPlayer from '@/components/MusicPlayer.vue';
 
 
 const contentRightScroll = ref(null);
-const BlogImagesModules = import.meta.glob("@/assets/blog-images/*.{png,jpg,jpeg,webp}",{ eager: true })
-const ShowIMagesModules = import.meta.glob("@/assets/show-images/*{png,jpg,jpeg,webp}",{ eager: true })
+const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
+const ShowIMagesModules = import.meta.glob("@/assets/show_images/*{png,jpg,jpeg,webp}",{ eager: true })
+const ShowImg = ref('')
+const ShowImgone = ref('')
+const BlogImg = ref('')
+const BlogImgOne = ref('')
 
 defineOptions({
   name: 'HomeView'
@@ -77,8 +81,10 @@ const BlogImages = () => {
     console.warn("没有查找到图片,blogimg")
     return null
   }
-    const RandomInedx =  Math.floor(Math.random * BlogImgList.length)
-    const BlogImg = BlogImgList[RandomInedx]
+    const RandomInedx =  Math.floor(Math.random() * BlogImgList.length)
+    const RandomInedxOne = Math.floor(Math.random() * BlogImgList.length)
+    BlogImg.value = BlogImgList[RandomInedx]
+    BlogImgOne.value = BlogImgList[RandomInedxOne]
 
   console.log("获取的图片：",BlogImg)
 }
@@ -89,11 +95,18 @@ const ShowImages = () => {
 {
   console.warn("没有找到照片,showimg")
 }
-  const RandomIndex = Math.floor(Math.random * ShowImgList.length)
-  const ShowImg = ShowImgList[RandomIndex]
+  const RandomIndex = Math.floor(Math.random() * ShowImgList.length)
+  const RandomIndexOne = Math.floor(Math.random() * ShowImgList.length) 
+  ShowImg.value = ShowImgList[RandomIndex]
+  ShowImgone.value = ShowImgList[RandomIndexOne ]
 
   console.log("获取的图片:",ShowImg)
+  console.log("图片url列表:",ShowImgList)
+  console.log('图片对象：',ShowIMagesModules)
 }
+
+BlogImages()
+ShowImages()
 
 const wheelHandler = (event) => {
   if (contentRightScroll.value) {
