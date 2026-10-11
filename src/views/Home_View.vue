@@ -62,23 +62,38 @@ import MusicPlayer from '@/components/MusicPlayer.vue';
 
 
 const contentRightScroll = ref(null);
-
+const BlogImagesModules = import.meta.glob("@/assets/blog-images/*.{png,jpg,jpeg,webp}",{ eager: true })
+const ShowIMagesModules = import.meta.glob("@/assets/show-images/*{png,jpg,jpeg,webp}",{ eager: true })
 
 defineOptions({
   name: 'HomeView'
 })
 
 
-// const BlogImages = () => {
-//   const modules = import.meta.glob("@/src/assets/blog-images/*{png,jpg,jpeg,webp}",{ eager: true })
-//   return Object.values(modules).map(item => item.default)
-//   console
-// }
+const BlogImages = () => { 
+  const BlogImgList =  Object.values(BlogImagesModules).map(item => item.default)
+  if (BlogImgList.length === 0)
+  {
+    console.warn("没有查找到图片,blogimg")
+    return null
+  }
+    const RandomInedx =  Math.floor(Math.random * BlogImgList.length)
+    const BlogImg = BlogImgList[RandomInedx]
 
-// const ShowImages = () => {
-//   const modules = import.meta.glob("@/src/assets/show-images/*{png,jpg,jpeg,webp}",{ eager: true })
-//   const ShowImg = Object.values(modules).map(item => item.default)
-// }
+  console.log("获取的图片：",BlogImg)
+}
+
+const ShowImages = () => {
+  const ShowImgList = Object.values(ShowIMagesModules).map(item => item.default)
+  if (ShowImgList === 0)
+{
+  console.warn("没有找到照片,showimg")
+}
+  const RandomIndex = Math.floor(Math.random * ShowImgList.length)
+  const ShowImg = ShowImgList[RandomIndex]
+
+  console.log("获取的图片:",ShowImg)
+}
 
 const wheelHandler = (event) => {
   if (contentRightScroll.value) {
