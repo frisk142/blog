@@ -22,28 +22,23 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem;">
-           <img :src="ShowImg" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+           <img :src="ShowImg" @mousedown="ShowImages" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
          <BlogLinecard fill style = "padding: 0.25rem;">
-          <img :src="BlogImg" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+          <img :src="BlogImg" @mousedown="BlogImages" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem">
-          <img :src="BlogImgOne" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+          <img :src="BlogImgOne" @mousedown="BlogImages" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
         </BlogLinecard>
        </div>
       </div>
-<!-- 
-       <div class="blogcard-1">
-        <BlogLinecard  fill></BlogLinecard>
-       </div> -->
-
       </div>
     </div> 
   </div>
@@ -187,11 +182,11 @@ const githubLinkconfig = {
  .row-b{
   display:grid;
   grid-template-areas: 
-    "ShowImages blog blog"
-    "ShowImages blogcard blogcard-1";
+    "ShowImages . ."
+    "ShowImages . .";
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 300px;
-  gap: 0.75rem;
+  gap: 1.25rem;
  }
 
  
