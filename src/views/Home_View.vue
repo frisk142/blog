@@ -22,20 +22,20 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem;">
-           <img :src="ShowImg" @mousedown="ShowImages" alt="ShowImages" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+           <img :src="ShowImg" @mousedown="RefresShow" alt="ShowImages" class="random-img" :class="{ blurAnim: isblur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
          <BlogLinecard fill style = "padding: 0.25rem;">
-          <img :src="BlogImg" @mousedown="BlogImages" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+          <img :src="BlogImg" @mousedown="RefresBlog" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem">
-          <img :src="BlogImgOne" @mousedown="BlogImages" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+          <img :src="BlogImgOne"  @mousedown="RefresBlog_1" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
         </BlogLinecard>
        </div>
       </div>
@@ -49,59 +49,48 @@
 
 <script setup>
 import { ref } from 'vue';
-import AvatarComponent from '../components/Avatar-component.vue';
-import BlogLinecard from '../components/Blog-Linecard.vue';
+import AvatarComponent from '../components/Avatar-component.vue'
+import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
-import LinkCard from '@/components/Link-Card.vue';
-import MusicPlayer from '@/components/MusicPlayer.vue';
+import LinkCard from '@/components/Link-Card.vue'
+import MusicPlayer from '@/components/MusicPlayer.vue'
+// import {useCountdown} from '@vueuse/core'
 
 
 const contentRightScroll = ref(null);
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
 const ShowIMagesModules = import.meta.glob("@/assets/show_images/*{png,jpg,jpeg,webp}",{ eager: true })
+// const { remaining, start, stop, pause, resume } = useCountdown(countdownSenconds,{})
+// const countdownSenconds = 10
 const ShowImg = ref('')
-const ShowImgone = ref('')
 const BlogImg = ref('')
 const BlogImgOne = ref('')
+const isblur = ref(false)
+
+
 
 defineOptions({
   name: 'HomeView'
 })
 
+const makeRefresh = (module, targetRef) => {
+  return ()  => {
+    isblur.value = true
+    const list = Object.values(module).map(m => m.default)
+    if (list.length === 0) return
+    targetRef.value = list[Math.floor(Math.random() * list.length)]
 
-const BlogImages = () => { 
-  const BlogImgList =  Object.values(BlogImagesModules).map(item => item.default)
-  if (BlogImgList.length === 0)
-  {
-    console.warn("没有查找到图片,blogimg")
-    return null
-  }
-    const RandomInedx =  Math.floor(Math.random() * BlogImgList.length)
-    const RandomInedxOne = Math.floor(Math.random() * BlogImgList.length)
-    BlogImg.value = BlogImgList[RandomInedx]
-    BlogImgOne.value = BlogImgList[RandomInedxOne]
-
-  console.log("获取的图片：",BlogImg)
+    setTimeout(() => {
+    isblur.value = false
+   },200)
+  } 
 }
 
-const ShowImages = () => {
-  const ShowImgList = Object.values(ShowIMagesModules).map(item => item.default)
-  if (ShowImgList === 0)
-{
-  console.warn("没有找到照片,showimg")
-}
-  const RandomIndex = Math.floor(Math.random() * ShowImgList.length)
-  const RandomIndexOne = Math.floor(Math.random() * ShowImgList.length) 
-  ShowImg.value = ShowImgList[RandomIndex]
-  ShowImgone.value = ShowImgList[RandomIndexOne ]
 
-  console.log("获取的图片:",ShowImg)
-  console.log("图片url列表:",ShowImgList)
-  console.log('图片对象：',ShowIMagesModules)
-}
+// const RefreshImageOverTime = (makeRefresh) => {
 
-BlogImages()
-ShowImages()
+//  }
+
 
 const wheelHandler = (event) => {
   if (contentRightScroll.value) {
@@ -109,7 +98,24 @@ const wheelHandler = (event) => {
     console.log('scrollTop:', contentRightScroll.value.scrollTop);
     event.preventDefault();
   }
-};
+}
+
+
+const RefresShow = makeRefresh(ShowIMagesModules, ShowImg)
+const RefresBlog = makeRefresh(BlogImagesModules, BlogImg)
+const RefresBlog_1 = makeRefresh(BlogImagesModules, BlogImgOne)
+
+
+RefresShow()
+RefresBlog()
+RefresBlog_1()
+
+console.log("ShowImg输出的url:",ShowImg)
+console.log("BlogImg输出的url:", BlogImg)
+console.log("BlogImgOne输出的url:", BlogImgOne)
+console.log("isblur状态",isblur.value)
+
+
 
 const avatarconfig = {
   position: 'relative',
@@ -201,7 +207,6 @@ const githubLinkconfig = {
   gap: 10px;
  }
 
-
  .row-b > * {
   width: 100%;
   height: 100%;
@@ -229,6 +234,16 @@ const githubLinkconfig = {
 
  .name-Format{
   display: block;
+ }
+
+ .random-img {
+  transition: filter 1s ease;
+  object-fit: cover;
+ }
+
+ .random-img.blurAnim {
+  filter: blur(10px);
+
  }
 
 @media (max-width: 768px) {
