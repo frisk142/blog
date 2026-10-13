@@ -22,74 +22,77 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem;">
-           <img :src="ShowImg" @mousedown="RefresShow" alt="ShowImages" class="random-img" :class="{ blurAnim: isblur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+           <img :src="ShowImg" @mousedown="RefresShow" alt="ShowImages" class="random-img" :class="{ blurAnim: ShowBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
-         <BlogLinecard fill style = "padding: 0.25rem;">
-          <img :src="BlogImg" @mousedown="RefresBlog" alt="blog" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+         <BlogLinecard  fill style = "padding: 0.25rem;">
+          <img :src="BlogImg" @mousedown="RefresBlog" alt="blog" class="random-img" :class="{ blurAnim: BlogBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
-        <BlogLinecard fill style="padding: 0.25rem">
-          <img :src="BlogImgOne"  @mousedown="RefresBlog_1" alt="blogcard" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+        <BlogLinecard fill style="padding: 0.25rem" ; position="relative">
+          <img :src="BlogImgOne"  @mousedown="RefresBlog_1" alt="blogcard" class="random-img" :class="{ blurAnim: BlogBlurOne }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+          <div class="img-text"></div>
         </BlogLinecard>
        </div>
       </div>
-      </div>
-    </div> 
+    </div>
+   </div> 
   </div>
- </div>
+</div>
 
 </template>
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import AvatarComponent from '../components/Avatar-component.vue'
 import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
-// import {useCountdown} from '@vueuse/core'
 
-
-const contentRightScroll = ref(null);
+const contentRightScroll = ref(null)
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
-const ShowIMagesModules = import.meta.glob("@/assets/show_images/*{png,jpg,jpeg,webp}",{ eager: true })
-// const { remaining, start, stop, pause, resume } = useCountdown(countdownSenconds,{})
-// const countdownSenconds = 10
+const BlogImagesOneModules = import.meta.glob("@/assets/blog_imagesone/*.{png,jpg,jpeg,webp}",{ eager: true })
+const ShowImagesModules = import.meta.glob("@/assets/show_images/*{png,jpg,jpeg,webp}",{ eager: true })
 const ShowImg = ref('')
 const BlogImg = ref('')
 const BlogImgOne = ref('')
-const isblur = ref(false)
-
+const ShowBlur = ref(false)
+const BlogBlur = ref(false)
+const BlogBlurOne = ref(false)
 
 
 defineOptions({
   name: 'HomeView'
 })
 
-const makeRefresh = (module, targetRef) => {
+
+const makeRefresh = (module, targetRef, BlurRef) => {
   return ()  => {
-    isblur.value = true
+    BlurRef.value = true
     const list = Object.values(module).map(m => m.default)
     if (list.length === 0) return
     targetRef.value = list[Math.floor(Math.random() * list.length)]
 
     setTimeout(() => {
-    isblur.value = false
-   },200)
+    BlurRef.value = false
+   },800)
   } 
 }
 
+const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
+const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
+const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
 
-// const RefreshImageOverTime = (makeRefresh) => {
-
-//  }
+RefresShow()
+RefresBlog()
+RefresBlog_1()
 
 
 const wheelHandler = (event) => {
@@ -101,21 +104,25 @@ const wheelHandler = (event) => {
 }
 
 
-const RefresShow = makeRefresh(ShowIMagesModules, ShowImg)
-const RefresBlog = makeRefresh(BlogImagesModules, BlogImg)
-const RefresBlog_1 = makeRefresh(BlogImagesModules, BlogImgOne)
+let timer, timer_1, timer_2 = null
+onMounted(() => {
+  timer = setInterval(RefresShow, 8200)
+  timer_1 = setInterval(RefresBlog, 6500)
+  timer_2 = setInterval(RefresBlog_1, 12000) 
+})
+
+onUnmounted(() => {
+  clearInterval(timer, timer_1, timer_2)
+})
 
 
-RefresShow()
-RefresBlog()
-RefresBlog_1()
-
-console.log("ShowImg输出的url:",ShowImg)
-console.log("BlogImg输出的url:", BlogImg)
-console.log("BlogImgOne输出的url:", BlogImgOne)
-console.log("isblur状态",isblur.value)
-
-
+console.log("ShowImg输出的url:",ShowImg.value)
+console.log("BlogImg输出的url:", BlogImg.value)
+console.log("BlogImgOne输出的url:", BlogImgOne.value)
+console.log("ShowImg的Blur状态:",ShowBlur.value)
+console.log("BlogBlur的Blur状态:",BlogBlur.value)
+console.log("BlogBlurOne的Blur状态:",BlogBlurOne.value)
+console.log("BlogImgOne所获得的值",BlogImagesOneModules.value)
 
 const avatarconfig = {
   position: 'relative',
@@ -156,8 +163,6 @@ const githubLinkconfig = {
   background-size: cover;
   width: 100vw;
   min-height: 100vh;
-  padding: 0;
-  margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
  }
@@ -243,7 +248,14 @@ const githubLinkconfig = {
 
  .random-img.blurAnim {
   filter: blur(10px);
+ }
 
+ .img-text {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 999;
  }
 
 @media (max-width: 768px) {
