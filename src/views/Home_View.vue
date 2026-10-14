@@ -22,7 +22,12 @@
       <div class="row-b">
        <div class = "ShowImages">
          <BlogLinecard fill style = "padding: 0.25rem; ">
-           <img :src="ShowImg" alt="ShowImages" class="random-img" :class="{ blurAnim: ShowBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center;" />
+          <div class="img-text-stand">
+            <div class="custom-font-text-stand"> 
+              hello world（测试）
+            </div>
+          </div>
+           <img :src="ShowImg" alt="ShowImages" class="img-show" :class="{ blurAnim: ShowBlur }" />
          </BlogLinecard>
        </div>
 
@@ -31,19 +36,21 @@
          <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
+              hello world（测试）
             </div> 
           </div>   
-           <img :src="BlogImg" alt="blog" class="random-img" :class="{ blurAnim: BlogBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+           <img :src="BlogImg" alt="blog" class="img-show" :class="{ blurAnim: BlogBlur }" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
-        <BlogLinecard fill style="padding: 0.25rem;" position="relative">
+        <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
+              hello world（测试）
             </div>
           </div>
-            <img :src="BlogImgOne" alt="blogcard" class="random-img" :class="{ blurAnim: BlogBlurOne }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
+            <img :src="BlogImgOne" alt="blogcard" class="img-show" :class="{ blurAnim: BlogBlurOne }"  >
         </BlogLinecard>
        </div>
       </div>
@@ -84,13 +91,16 @@ defineOptions({
 const makeRefresh = (module, targetRef, BlurRef) => {
   return ()  => {
     BlurRef.value = true
+    setTimeout(() => {
+
     const list = Object.values(module).map(m => m.default)
     if (list.length === 0) return
     targetRef.value = list[Math.floor(Math.random() * list.length)]
+    },300)
 
     setTimeout(() => {
     BlurRef.value = false
-   },800)
+   },1000)
   } 
 }
 
@@ -203,8 +213,8 @@ const githubLinkconfig = {
   grid-template-areas: 
     "ShowImages . ."
     "ShowImages . .";
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 300px;
+  grid-template-columns: 1.35fr 2fr 1fr;
+  grid-template-rows: 350px;
   gap: 1.25rem;
  }
 
@@ -215,7 +225,7 @@ const githubLinkconfig = {
   grid-template-areas: 
     "blog"
     "blogcard";
-  grid-template-rows: 145px 145px; 
+  grid-template-rows: 170px 170px; 
   grid-column: 2 / 4;
   gap: 10px;
  }
@@ -249,22 +259,34 @@ const githubLinkconfig = {
   display: block;
  }
 
- .random-img {
+ .img-show {
   transition: filter 1s ease;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  cursor: pointer;
   object-fit: cover;
  }
 
- .random-img.blurAnim {
+ .img-show.blurAnim {
   filter: blur(10px);
  }
 
  .img-text {
   position: absolute;
-  height: 95%;
-  width: 98.5%;
-  z-index: 999;
+  inset: 0.1rem;
   background: linear-gradient( to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
   border-radius: 32px;
+  z-index: 10;
+ }
+
+ .img-text-stand {
+  position: absolute;
+  inset: 0.2rem;
+  background: linear-gradient( to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 32px;
+  z-index: 10;
  }
 
  .custom-font-text {
@@ -272,10 +294,18 @@ const githubLinkconfig = {
   position: absolute; 
   left: 20px;
   top: 80px;
-  font-size: 25px;
+  font-size: 20px;
  }
 
+ .custom-font-text-stand {
+  font-family: 'Mont-Regular', sans-serif;
+  position: absolute; 
+  font-size: 20px;
+  left: 10px;
+  bottom: 30px;
+ }
 
+ 
 @media (max-width: 768px) {
   .home-layout {
     padding: 100px 1rem 1rem;
