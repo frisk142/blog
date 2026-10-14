@@ -35,7 +35,7 @@
         <div class="blog">
          <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
           <div class="img-text">
-            <div class="custom-font-text">
+            <div class="custom-font-text" @mousedown="">
               hello world（测试）
             </div> 
           </div>   
@@ -47,7 +47,6 @@
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
-              hello world（测试）
             </div>
           </div>
             <img :src="BlogImgOne" alt="blogcard" class="img-show" :class="{ blurAnim: BlogBlurOne }"  >
@@ -69,15 +68,18 @@ import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
+import Postdata_View from './Postdata_View.vue';
 import "@/assets/fonts/fonts.css"
 
 const contentRightScroll = ref(null)
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
 const BlogImagesOneModules = import.meta.glob("@/assets/blog_imagesone/*.{png,jpg,jpeg,webp}",{ eager: true })
-const ShowImagesModules = import.meta.glob("@/assets/show_images/*{png,jpg,jpeg,webp}",{ eager: true })
+const ShowImagesModules = import.meta.glob("@/assets/show_images/*.{png,jpg,jpeg,webp}",{ eager: true })
+const MdFileModules = import.meta.glob('@/content/posts//*.{md}', { eager:true })
 const ShowImg = ref('')
 const BlogImg = ref('')
 const BlogImgOne = ref('')
+const MdFilePath = ref('')
 const ShowBlur = ref(false)
 const BlogBlur = ref(false)
 const BlogBlurOne = ref(false)
@@ -88,25 +90,36 @@ defineOptions({
 })
 
 
-const makeRefresh = (module, targetRef, BlurRef) => {
+const makeRefresh = (module, targetRef, BlurRef, MdFileAllPath, MdFilePath ) => {
+  let index = 0
+  let Mdindex = 0
   return ()  => {
     BlurRef.value = true
     setTimeout(() => {
-
-    const list = Object.values(module).map(m => m.default)
-    if (list.length === 0) return
-    targetRef.value = list[Math.floor(Math.random() * list.length)]
-    },300)
+     const Mdlist = Object.values(MdFileAllPath).map(m => m.default)
+     const list = Object.values(module).map(m => m.default)
+     if (list.length === 0 && Mdlist.length === 0) return
+     targetRef.value = list[index]
+     MdFilePath.value = Mdlist[Mdindex]
+     Mdindex = (Mdindex+1) % Mdlist.length
+     index = (index+1) % list.length
+    },400)
 
     setTimeout(() => {
-    BlurRef.value = false
-   },1000)
+     BlurRef.value = false
+    },600)
   } 
+}
+
+
+const loadmdfile = () =>{
+  
 }
 
 const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
 const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
 const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
+// const RefresMdFile = makeRefresh(MdFileModules, MdFilePath)
 
 RefresShow()
 RefresBlog()
@@ -132,6 +145,10 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(timer, timer_1, timer_2)
 })
+
+// const JumpToArticle = () =>{
+
+// }
 
 
 console.log("ShowImg输出的url:",ShowImg.value)
@@ -293,7 +310,7 @@ const githubLinkconfig = {
   font-family: 'Mont-Regular', sans-serif;
   position: absolute; 
   left: 20px;
-  top: 80px;
+  top: 100px;
   font-size: 20px;
  }
 

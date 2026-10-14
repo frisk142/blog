@@ -31,7 +31,6 @@ const handleMouseMove = (event) => {
      console.log("isHovering.value:", isHovering.value)
     return
   }
-
   isVisible.value = event.clientY <= TRIGGER_ZONE
   console.log("isVisible.value:", isVisible.value)
 
