@@ -21,22 +21,29 @@
 
       <div class="row-b">
        <div class = "ShowImages">
-         <BlogLinecard fill style = "padding: 0.25rem;">
-           <img :src="ShowImg" @mousedown="RefresShow" alt="ShowImages" class="random-img" :class="{ blurAnim: ShowBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center" />
+         <BlogLinecard fill style = "padding: 0.25rem; ">
+           <img :src="ShowImg" alt="ShowImages" class="random-img" :class="{ blurAnim: ShowBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover; object-position: center;" />
          </BlogLinecard>
        </div>
 
        <div class="row-b-right">
         <div class="blog">
-         <BlogLinecard  fill style = "padding: 0.25rem;">
-          <img :src="BlogImg" @mousedown="RefresBlog" alt="blog" class="random-img" :class="{ blurAnim: BlogBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
+         <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
+          <div class="img-text">
+            <div class="custom-font-text">
+            </div> 
+          </div>   
+           <img :src="BlogImg" alt="blog" class="random-img" :class="{ blurAnim: BlogBlur }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
-        <BlogLinecard fill style="padding: 0.25rem" ; position="relative">
-          <img :src="BlogImgOne"  @mousedown="RefresBlog_1" alt="blogcard" class="random-img" :class="{ blurAnim: BlogBlurOne }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
-          <div class="img-text"></div>
+        <BlogLinecard fill style="padding: 0.25rem;" position="relative">
+          <div class="img-text">
+            <div class="custom-font-text">
+            </div>
+          </div>
+            <img :src="BlogImgOne" alt="blogcard" class="random-img" :class="{ blurAnim: BlogBlurOne }" style="width: 100%; height: 100%; border-radius: 32px; cursor: pointer; object-fit: cover;" >
         </BlogLinecard>
        </div>
       </div>
@@ -55,6 +62,7 @@ import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
+import "@/assets/fonts/fonts.css"
 
 const contentRightScroll = ref(null)
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
@@ -252,11 +260,21 @@ const githubLinkconfig = {
 
  .img-text {
   position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0);
+  height: 95%;
+  width: 98.5%;
   z-index: 999;
+  background: linear-gradient( to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 32px;
  }
+
+ .custom-font-text {
+  font-family: 'Mont-Regular', sans-serif;
+  position: absolute; 
+  left: 20px;
+  top: 80px;
+  font-size: 25px;
+ }
+
 
 @media (max-width: 768px) {
   .home-layout {
