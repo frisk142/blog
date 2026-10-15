@@ -9,9 +9,11 @@
 
 <script setup>
 import { ref, onMounted, } from 'vue'
-// import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
+const route = useRoute()
+const slug = route.params.slug
 
 // const route = useRoute()
 const md = new MarkdownIt()
