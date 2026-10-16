@@ -68,7 +68,7 @@ import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 // import Postdata_View from './Postdata_View.vue';
 import "@/assets/fonts/fonts.css"
 
@@ -76,12 +76,12 @@ const contentRightScroll = ref(null)
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
 const BlogImagesOneModules = import.meta.glob("@/assets/blog_imagesone/*.{png,jpg,jpeg,webp}",{ eager: true })
 const ShowImagesModules = import.meta.glob("@/assets/show_images/*.{png,jpg,jpeg,webp}",{ eager: true })
-const MdFileModules = import.meta.glob('@/content/posts/*.md', { eager:true , query: 'raw'})
-const router = useRouter
+const MdFileModules = import.meta.glob('@/content/posts/*.md', { eager:true , query: '?raw', import: 'default'})
+// const router = useRouter
 const ShowImg = ref('')
 const BlogImg = ref('')
 const BlogImgOne = ref('')
-const MdFilePath = ref('')
+// const MdFilePath = ref('')
 const ShowBlur = ref(false)
 const BlogBlur = ref(false)
 const BlogBlurOne = ref(false)
@@ -109,35 +109,24 @@ const makeRefresh = (module, targetRef, BlurRef, ) => {
   } 
 }
 
-const getadmdfile = (mdfileall, mdfilepath) => {
-  let index = 0
-  return() => {
-  setTimeout(() => {
-    const list = Object.keys(mdfileall)
-    if (list.length === 0) return
-     mdfilepath.value = list[index]
-     index = (index+1) % list.length
-    },400)
-  }
-}
+// const getadmdfile = ( modules ) => {
+//   const allposts = Object.entries(modules).map(([Path, content]) => {
+//     const slug = Path.split('/').pop().replace('.md', '') 
+//     return {slug, content}
+//   })
+// }
 
-const loadmdfile = (mdfilepath) => {
-  router.push({
-    name: 'Postdetail',
-    params: { slug: 'hello-world'}
-  })
 
-}
 
 const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
 const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
 const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
-const mdfielurl = getadmdfile(MdFileModules, MdFilePath)
+// const mdfielurl = getadmdfile(MdFileModules, MdFilePath)
 
 RefresShow()
 RefresBlog()
 RefresBlog_1()
-mdfielurl()
+// mdfielurl()
 
 
 const wheelHandler = (event) => {
@@ -150,6 +139,7 @@ const wheelHandler = (event) => {
 
 
 let timer, timer_1, timer_2 = null
+
 onMounted(() => {
   timer = setInterval(RefresShow, 8200)
   timer_1 = setInterval(RefresBlog, 6500)
@@ -341,7 +331,11 @@ const githubLinkconfig = {
     padding: 100px 1rem 1rem;
   }
   .row-a {grid-template-columns: 1fr;}
-  .row-b {grid-template-columns: 1fr;}
+  .row-b {grid-template-areas: 
+    "ShowImages"
+    "blog"
+    "blogcard"
+  ;}
   .row-c {grid-template-columns: 1fr;}
 }
 

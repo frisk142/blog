@@ -11,7 +11,7 @@ const routes = [
   {path: '/about', component: AboutView},
   {path: '/test', component: Testviews},
   {path: '/postdata', component: PostdataView},
-  {path: '/post/:slug',name: 'PostDetail', component: () => import('@/views/PostDetailView.vue')}
+  // {path: '/post/:slug',name: 'PostDetail', component: () => import('@/views/PostDetailView.vue')}
 ]
 
 const router = createRouter({
