@@ -71,6 +71,7 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
 // import { useRouter } from 'vue-router'
 // import Postdata_View from './Postdata_View.vue';
 import "@/assets/fonts/fonts.css"
+import router from '@/router/index.js';
 
 const contentRightScroll = ref(null)
 const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
@@ -85,6 +86,7 @@ const BlogImgOne = ref('')
 const ShowBlur = ref(false)
 const BlogBlur = ref(false)
 const BlogBlurOne = ref(false)
+const entries = Object.entries(MdFileModules)
 
 
 defineOptions({
@@ -109,12 +111,12 @@ const makeRefresh = (module, targetRef, BlurRef, ) => {
   } 
 }
 
-// const getadmdfile = ( modules ) => {
-//   const allposts = Object.entries(modules).map(([Path, content]) => {
-//     const slug = Path.split('/').pop().replace('.md', '') 
-//     return {slug, content}
-//   })
-// }
+const goToArticle = (slug) => {
+  router.push({
+    name: 'PostDateill',
+    params: { slug : slug }
+  })
+}
 
 
 
@@ -151,7 +153,6 @@ onUnmounted(() => {
 })
 
 
-
 console.log("ShowImg输出的url:",ShowImg.value)
 console.log("BlogImg输出的url:", BlogImg.value)
 console.log("BlogImgOne输出的url:", BlogImgOne.value)
@@ -160,7 +161,9 @@ console.log("BlogBlur的Blur状态:",BlogBlur.value)
 console.log("BlogBlurOne的Blur状态:",BlogBlurOne.value)
 console.log("BlogImgOne所获得的值",BlogImagesOneModules.value)
 console.log('mdfileobject',MdFileModules, MdFileModules.keys)
+console.log("mdfileurl", )
 console.log(Object.keys(MdFileModules))
+console.log("md文件列表", entries.map(item => item[0]))
 
 const avatarconfig = {
   position: 'relative',

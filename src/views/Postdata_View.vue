@@ -37,6 +37,8 @@ const BlogLinecardconfig = {
     margin: "0 auto",
 }
 
+console.log('当前要渲染的文章标识是：', slug)
+
 </script>
 
 <style scoped>
