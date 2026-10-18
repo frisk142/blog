@@ -11,18 +11,16 @@ const routes = [
   {path: '/about', component: AboutView},
   {path: '/test', component: Testviews},
   {path: '/postdata', component: PostdataView},
-  // {path: '/post/:slug',name: 'PostDetail', component: () => import('@/views/PostDetailView.vue')}
+  {
+    path: '/posts/:slug',
+    name: 'PostDetail',
+    component: PostdataView
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes:[
-    {
-    path: '/post/:slug',
-    name: 'PostDetail',
-    component: PostdataView
-    }
-  ] 
+  routes 
 })
 
 export default router

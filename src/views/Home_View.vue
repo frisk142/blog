@@ -46,7 +46,8 @@
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text">
-            <div class="custom-font-text">
+            <div class="custom-font-text" @mousedown="goToArticle(sulg)">
+              hello-world
             </div>
           </div>
             <img :src="BlogImgOne" alt="blogcard" class="img-show" :class="{ blurAnim: BlogBlurOne }"  >
@@ -111,24 +112,20 @@ const makeRefresh = (module, targetRef, BlurRef, ) => {
   } 
 }
 
-const goToArticle = (slug) => {
-  router.push({
-    name: 'PostDateill',
-    params: { slug : slug }
+
+const getmdfile = ( modules ) => {
+  return Object.entries(modules).map(([Path, content]) => {
+    const slug = Path.split('/').pop().replace('.md', '') 
+    return {slug, content}
   })
 }
 
-
-
-const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
-const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
-const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
-// const mdfielurl = getadmdfile(MdFileModules, MdFilePath)
-
-RefresShow()
-RefresBlog()
-RefresBlog_1()
-// mdfielurl()
+const goToArticle = (slug) => {
+  router.push({
+    name: 'PostDateil',
+    params: { slug : slug }
+  })
+}
 
 
 const wheelHandler = (event) => {
@@ -153,15 +150,22 @@ onUnmounted(() => {
 })
 
 
-console.log("ShowImg输出的url:",ShowImg.value)
-console.log("BlogImg输出的url:", BlogImg.value)
-console.log("BlogImgOne输出的url:", BlogImgOne.value)
+const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
+const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
+const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
+const getmdfilename = getmdfile(MdFileModules)
+
+RefresShow()
+RefresBlog()
+RefresBlog_1()
+
+
 console.log("ShowImg的Blur状态:",ShowBlur.value)
 console.log("BlogBlur的Blur状态:",BlogBlur.value)
 console.log("BlogBlurOne的Blur状态:",BlogBlurOne.value)
 console.log("BlogImgOne所获得的值",BlogImagesOneModules.value)
 console.log('mdfileobject',MdFileModules, MdFileModules.keys)
-console.log("mdfileurl", )
+console.log("slug:", getmdfilename[0].slug)
 console.log(Object.keys(MdFileModules))
 console.log("md文件列表", entries.map(item => item[0]))
 
