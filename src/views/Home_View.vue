@@ -116,6 +116,7 @@ const makeRefresh = (module, targetRef, BlurRef, ) => {
 const getmdfile = ( modules ) => {
   return Object.entries(modules).map(([Path, content]) => {
     const slug = Path.split('/').pop().replace('.md', '') 
+    
     console.log("输出的slug", slug)
     return {slug, content}
   })
@@ -171,6 +172,7 @@ console.log('mdfileobject',MdFileModules, MdFileModules.keys)
 console.log("slug:", getmdfilename[0].slug)
 console.log(Object.keys(MdFileModules))
 console.log("md文件列表", entries.map(item => item[0]))
+console.log ("gitfile的内容:",getmdfilename)
 
 const avatarconfig = {
   position: 'relative',

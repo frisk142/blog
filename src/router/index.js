@@ -18,7 +18,6 @@ const routes = [
   }
 ]
 
-console.log ("跳转路由", )
 
 const router = createRouter({
   history: createWebHistory(),

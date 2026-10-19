@@ -13,20 +13,20 @@ import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
 const route = useRoute()
-const slug = route.params.slug
 
-// const route = useRoute()
 const md = new MarkdownIt()
 
 const title = ref('')
 const htmlContent = ref('')
 
 onMounted(async () => {
-    const res = await fetch('../src/content/posts/{slug}')
+    const slug = route.params.slug
+    const res = await fetch(`../src/content/posts/${slug}.md`)
     const raw = await res.text()
     htmlContent.value = md.render(raw)
     title.value = "test_file"
-
+    console.log('当前要渲染的文章标识是：', slug)
+    console.log("实质渲染的位置",res)
 })
 
 const BlogLinecardconfig = {
@@ -37,7 +37,6 @@ const BlogLinecardconfig = {
     margin: "0 auto",
 }
 
-console.log('当前要渲染的文章标识是：', slug)
 
 </script>
 
