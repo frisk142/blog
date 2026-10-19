@@ -45,8 +45,8 @@
 
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
-          <div class="img-text">
-            <div class="custom-font-text" @mousedown="goToArticle(sulg)">
+          <div class="img-text" @mousedown="goToArticle(getmdfilename[1].slug)">
+            <div class="custom-font-text">
               hello-world
             </div>
           </div>
@@ -116,13 +116,16 @@ const makeRefresh = (module, targetRef, BlurRef, ) => {
 const getmdfile = ( modules ) => {
   return Object.entries(modules).map(([Path, content]) => {
     const slug = Path.split('/').pop().replace('.md', '') 
+    console.log("输出的slug", slug)
     return {slug, content}
   })
 }
 
 const goToArticle = (slug) => {
+  console.log ('跳转', goToArticle.params)
+  console.log ("sulg数值",slug)
   router.push({
-    name: 'PostDateil',
+    name: 'PostDetail',
     params: { slug : slug }
   })
 }

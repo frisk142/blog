@@ -22,7 +22,7 @@ const title = ref('')
 const htmlContent = ref('')
 
 onMounted(async () => {
-    const res = await fetch('../src/content/posts/hello-world.md')
+    const res = await fetch('../src/content/posts/{slug}')
     const raw = await res.text()
     htmlContent.value = md.render(raw)
     title.value = "test_file"
