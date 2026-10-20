@@ -69,58 +69,41 @@ import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
-// import { useRouter } from 'vue-router'
-// import Postdata_View from './Postdata_View.vue';
 import "@/assets/fonts/fonts.css"
-import router from '@/router/index.js';
+import { useRouter } from 'vue-router';
+import { CombinedList } from '@/utils/home_data.js';
 
 const contentRightScroll = ref(null)
-const BlogImagesModules = import.meta.glob("@/assets/blog_images/*.{png,jpg,jpeg,webp}",{ eager: true })
-const BlogImagesOneModules = import.meta.glob("@/assets/blog_imagesone/*.{png,jpg,jpeg,webp}",{ eager: true })
-const ShowImagesModules = import.meta.glob("@/assets/show_images/*.{png,jpg,jpeg,webp}",{ eager: true })
-const MdFileModules = import.meta.glob('@/content/posts/*.md', { eager:true , query: '?raw', import: 'default'})
-// const router = useRouter
-const ShowImg = ref('')
-const BlogImg = ref('')
-const BlogImgOne = ref('')
-// const MdFilePath = ref('')
-const ShowBlur = ref(false)
-const BlogBlur = ref(false)
-const BlogBlurOne = ref(false)
-const entries = Object.entries(MdFileModules)
-
+const router = useRouter()
+const currenIndex = ref(0)
+const currenCarData = ref(CombinedList[0])
+const isBlurring = ref(false)
 
 defineOptions({
   name: 'HomeView'
 })
 
 
-const makeRefresh = (module, targetRef, BlurRef, ) => {
-  let index = 0
-  return ()  => {
-    BlurRef.value = true
-    setTimeout(() => {
-     const list = Object.values(module).map(m => m.default)
-     if (list.length === 0) return
-      targetRef.value = list[index]
-      index = (index+1) % list.length
-    },400)
+const nextCard = () => {
+  isBlurring.value = true
+  setTimeout(() => {
+    currenIndex.value = (currenIndex.value + 1) % CombinedList.length
+    currenCarData.value = CombinedList[currenIndex.value]
+   }, 400)
 
-    setTimeout(() => {
-     BlurRef.value = false
-    },600)
-  } 
+   setTimeout(() => {
+    isBlurring.value = false
+   }, 600)
 }
 
+let timer = null
+onMounted(() => {
+  timer = setInterval(nextCard, 8000)
+})
 
-const getmdfile = ( modules ) => {
-  return Object.entries(modules).map(([Path, content]) => {
-    const slug = Path.split('/').pop().replace('.md', '') 
-    
-    console.log("输出的slug", slug)
-    return {slug, content}
-  })
-}
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
 
 const goToArticle = (slug) => {
   console.log ('跳转', goToArticle.params)
@@ -131,7 +114,6 @@ const goToArticle = (slug) => {
   })
 }
 
-
 const wheelHandler = (event) => {
   if (contentRightScroll.value) {
     contentRightScroll.value.scrollTop += event.deltaY;
@@ -141,38 +123,6 @@ const wheelHandler = (event) => {
 }
 
 
-let timer, timer_1, timer_2 = null
-
-onMounted(() => {
-  timer = setInterval(RefresShow, 8200)
-  timer_1 = setInterval(RefresBlog, 6500)
-  timer_2 = setInterval(RefresBlog_1, 12000) 
-})
-
-onUnmounted(() => {
-  clearInterval(timer, timer_1, timer_2)
-})
-
-
-const RefresShow = makeRefresh(ShowImagesModules, ShowImg, ShowBlur)
-const RefresBlog = makeRefresh(BlogImagesModules, BlogImg, BlogBlur)
-const RefresBlog_1 = makeRefresh(BlogImagesOneModules, BlogImgOne, BlogBlurOne)
-const getmdfilename = getmdfile(MdFileModules)
-
-RefresShow()
-RefresBlog()
-RefresBlog_1()
-
-
-console.log("ShowImg的Blur状态:",ShowBlur.value)
-console.log("BlogBlur的Blur状态:",BlogBlur.value)
-console.log("BlogBlurOne的Blur状态:",BlogBlurOne.value)
-console.log("BlogImgOne所获得的值",BlogImagesOneModules.value)
-console.log('mdfileobject',MdFileModules, MdFileModules.keys)
-console.log("slug:", getmdfilename[0].slug)
-console.log(Object.keys(MdFileModules))
-console.log("md文件列表", entries.map(item => item[0]))
-console.log ("gitfile的内容:",getmdfilename)
 
 const avatarconfig = {
   position: 'relative',
