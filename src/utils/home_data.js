@@ -9,7 +9,7 @@ const getMds = (modules) => Object.entries(modules).map(([path, content]) => ({
   slug: path.split('/').pop().replace(".md", ""),
   content
 }))
-
+   
 export const ShowImgList = getImages(ShowImagesModules)
 export const BlogImgList = getImages(BlogImagesModules)
 export const BlogImgOneList = getImages(BlogImagesOneModules)

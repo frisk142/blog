@@ -16,7 +16,7 @@
           </div>
          </div>
         </BlogLinecard>
-       <musicPlayer />
+       <musicPlayer/>
       </div>
 
       <div class="row-b">
@@ -70,8 +70,8 @@ import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import "@/assets/fonts/fonts.css"
-import { useRouter } from 'vue-router';
-import { CombinedList } from '@/utils/home_data.js';
+import { useRouter } from 'vue-router'
+import { CombinedList } from '@/utils/home_data.js'
 
 const contentRightScroll = ref(null)
 const router = useRouter()
