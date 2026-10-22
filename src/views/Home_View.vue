@@ -27,7 +27,7 @@
               hello world（测试）
             </div>
           </div>
-           <img :src="ShowImg" alt="ShowImages" class="img-show" :class="{ blurAnim: ShowBlur }" />
+           <img :src="currentShowData.showImg" alt="ShowImages" class="img-show" :class="{ blurAnim: isBlurring }" />
          </BlogLinecard>
        </div>
 
@@ -36,21 +36,20 @@
          <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
-              hello world（测试）
+              hello-world
             </div> 
           </div>   
-           <img :src="BlogImg" alt="blog" class="img-show" :class="{ blurAnim: BlogBlur }" > 
+           <img :src="currentBlogData" alt="blog" class="img-show" :class="{ blurAnim: isBlurring }" > 
          </BlogLinecard> 
         </div>
 
        <div class="blogcard">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
-          <div class="img-text" @mousedown="goToArticle(getmdfilename[1].slug)">
+          <div class="img-text" @mousedown="goToArticle(currenCarData.md?.slug)">
             <div class="custom-font-text">
-              hello-world
             </div>
           </div>
-            <img :src="BlogImgOne" alt="blogcard" class="img-show" :class="{ blurAnim: BlogBlurOne }"  >
+            <img :src="currentBlogImgData.blogImgone" alt="blogcard" class="img-show" :class="{ blurAnim: isBlurring }"  >
         </BlogLinecard>
        </div>
       </div>
@@ -63,7 +62,7 @@
 
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import AvatarComponent from '../components/Avatar-component.vue'
 import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
@@ -71,12 +70,10 @@ import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import "@/assets/fonts/fonts.css"
 import { useRouter } from 'vue-router'
-import { CombinedList } from '@/utils/home_data.js'
+import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, BlogImgList,} from '../utils/home_data.js';
 
 const contentRightScroll = ref(null)
 const router = useRouter()
-const currenIndex = ref(0)
-const currenCarData = ref(CombinedList[0])
 const isBlurring = ref(false)
 
 defineOptions({
@@ -84,26 +81,51 @@ defineOptions({
 })
 
 
-const nextCard = () => {
+const ShowImgIndex = ref(0)
+const currentShowData = computed(() => ShowImg_MdFile_List[ShowImgIndex] || {})
+
+const BlogImgOneIndex = ref(0)
+const currentBlogData = computed(() => BlogImgOne_MdFile_List[BlogImgOneIndex] || {})
+
+const BlogImgIndex = ref(0)
+const currentBlogImgData = computed(() => BlogImgList[BlogImgIndex] || '')
+
+const triggerBluer = () => {
   isBlurring.value = true
-  setTimeout(() => {
-    currenIndex.value = (currenIndex.value + 1) % CombinedList.length
-    currenCarData.value = CombinedList[currenIndex.value]
-   }, 400)
+  setTimeout(() => {isBlurring.value = false}, 600)
+  }
 
-   setTimeout(() => {
-    isBlurring.value = false
-   }, 600)
-}
+let timer, timer_1, timer_2
 
-let timer = null
-onMounted(() => {
-  timer = setInterval(nextCard, 8000)
+onMounted (() => {
+  timer = (() => {
+    triggerBluer()
+    setTimeout(() => {
+      ShowImgIndex.value = (ShowImgIndex.value + 1) % ShowImg_MdFile_List.length
+    }, 400)
+  }, 8000)
+
+  timer_1 = (() => {
+    triggerBluer()
+    setTimeout(() => {
+      BlogImgOneIndex.value = (BlogImgOneIndex.value + 1) % BlogImgOne_MdFile_List.length
+    }, 400)
+  }, 6500)
+  
+  timer_2 = (() => {
+    triggerBluer()
+    setTimeout(() => {
+      BlogImgIndex.value = (BlogImgIndex.value + 1 ) % BlogImgList.length
+    }, 400)
+  },9500)
 })
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
+  clearInterval(timer)
+  clearInterval(timer_1)
+  clearInterval(timer_2)
 })
+
 
 const goToArticle = (slug) => {
   console.log ('跳转', goToArticle.params)
@@ -121,7 +143,6 @@ const wheelHandler = (event) => {
     event.preventDefault();
   }
 }
-
 
 
 const avatarconfig = {
