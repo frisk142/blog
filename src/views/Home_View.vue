@@ -24,10 +24,10 @@
          <BlogLinecard fill style = "padding: 0.25rem; ">
           <div class="img-text-stand">
             <div class="custom-font-text-stand"> 
-              hello world（测试）
+              {{ currentShowData.md.slug }}
             </div>
           </div>
-           <img :src="currentShowData.showImg" alt="ShowImages" class="img-show" :class="{ blurAnim: isBlurring }" />
+           <img :src="currentShowData.showImg" alt="ShowImages" class="img-show" :class="{ blurAnim: ShowImgBlur }" />
          </BlogLinecard>
        </div>
 
@@ -39,7 +39,8 @@
               hello-world
             </div> 
           </div>   
-           <img :src="currentBlogData" alt="blog" class="img-show" :class="{ blurAnim: isBlurring }" > 
+           <img :src="currentBlogData.BlogImgone" alt="blog" class="img-show" :class="{ blurAnim: BlogImgBlur }" >
+            
          </BlogLinecard> 
         </div>
 
@@ -47,9 +48,10 @@
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text" @mousedown="goToArticle(currenCarData.md?.slug)">
             <div class="custom-font-text">
+              {{ currentBlogImgMdData.md?.slug }}
             </div>
           </div>
-            <img :src="currentBlogImgData.blogImgone" alt="blogcard" class="img-show" :class="{ blurAnim: isBlurring }"  >
+            <img :src="currentBlogImgMdData.BlogImg" alt="blogcard" class="img-show" :class="{ blurAnim: BlogImgMdBlur }"  >
         </BlogLinecard>
        </div>
       </div>
@@ -70,11 +72,10 @@ import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import "@/assets/fonts/fonts.css"
 import { useRouter } from 'vue-router'
-import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, BlogImgList,} from '../utils/home_data.js';
+import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, Blog_Img_List,} from '../utils/home_data.js';
 
 const contentRightScroll = ref(null)
 const router = useRouter()
-const isBlurring = ref(false)
 
 defineOptions({
   name: 'HomeView'
@@ -82,40 +83,49 @@ defineOptions({
 
 
 const ShowImgIndex = ref(0)
-const currentShowData = computed(() => ShowImg_MdFile_List[ShowImgIndex] || {})
+const currentShowData = computed(() => ShowImg_MdFile_List[ShowImgIndex.value] || {})
 
 const BlogImgOneIndex = ref(0)
-const currentBlogData = computed(() => BlogImgOne_MdFile_List[BlogImgOneIndex] || {})
+const currentBlogData = computed(() => BlogImgOne_MdFile_List[BlogImgOneIndex.value] || {})
 
 const BlogImgIndex = ref(0)
-const currentBlogImgData = computed(() => BlogImgList[BlogImgIndex] || '')
+const currentBlogImgMdData = computed(() => Blog_Img_List[BlogImgIndex.value] || {})
 
-const triggerBluer = () => {
-  isBlurring.value = true
-  setTimeout(() => {isBlurring.value = false}, 600)
-  }
+
+const ShowImgBlur = ref(false)
+const BlogImgBlur = ref(false)
+const BlogImgMdBlur = ref(false)
 
 let timer, timer_1, timer_2
 
 onMounted (() => {
-  timer = (() => {
-    triggerBluer()
+  timer = setInterval(() => {
+    ShowImgBlur.value = true
     setTimeout(() => {
-      ShowImgIndex.value = (ShowImgIndex.value + 1) % ShowImg_MdFile_List.length
-    }, 400)
-  }, 8000)
+       ShowImgIndex.value = (ShowImgIndex.value + 1) % ShowImg_MdFile_List.length
+        setTimeout(() => {
+         ShowImgBlur.value = false
+       }, 600)
+      }, 400)
+    }, 6000)
 
-  timer_1 = (() => {
-    triggerBluer()
+  timer_1 = setInterval(() => {
+    BlogImgBlur.value = true
     setTimeout(() => {
       BlogImgOneIndex.value = (BlogImgOneIndex.value + 1) % BlogImgOne_MdFile_List.length
+      setTimeout(() => {
+        BlogImgBlur.value = false
+      }, 600);
     }, 400)
   }, 6500)
   
-  timer_2 = (() => {
-    triggerBluer()
+  timer_2 = setInterval(() => {
+    BlogImgMdBlur.value = true
     setTimeout(() => {
-      BlogImgIndex.value = (BlogImgIndex.value + 1 ) % BlogImgList.length
+      BlogImgIndex.value = (BlogImgIndex.value + 1 ) % Blog_Img_List.length
+      setTimeout(() => {
+        BlogImgMdBlur.value = false
+      }, 600)
     }, 400)
   },9500)
 })
@@ -128,7 +138,7 @@ onUnmounted(() => {
 
 
 const goToArticle = (slug) => {
-  console.log ('跳转', goToArticle.params)
+  console.log ('跳转', goToArticle)
   console.log ("sulg数值",slug)
   router.push({
     name: 'PostDetail',
@@ -143,6 +153,10 @@ const wheelHandler = (event) => {
     event.preventDefault();
   }
 }
+
+console.log ("Showimg:", currentShowData)
+console.log ("BlogImg:", currentBlogData)
+console.log ("BlogMdone", currentBlogImgMdData)
 
 
 const avatarconfig = {

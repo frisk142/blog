@@ -19,6 +19,11 @@ export const BlogImgOneMdList = getMds(BlogImgoneMdFileModules)
 
 const ShowmaxLen = Math.max(ShowImgList.length, ShowImgMdList.length)
 const BlogmaxLen = Math .max(BlogImgOneList.length, BlogImgOneMdList.length)
+const BlogImgmaxLen = Math.max(BlogImgList.length)
+
+export const Blog_Img_List = Array.from({ length: BlogImgmaxLen }).map((_, index) => ({
+  BlogImg: BlogImgList[index % BlogImgList.length] || '',
+}))
 
 export const ShowImg_MdFile_List = Array.from({ length: ShowmaxLen }).map((_, index) => ({
   showImg: ShowImgList[index % ShowImgList.length] || '',
