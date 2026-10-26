@@ -1,5 +1,6 @@
 <template>
     <BlogLinecard v-bind="BlogLinecardconfig">
+     <div class="Showimg"></div>
       <div class="post-detail">
           <h1>{{ title }}</h1>
           <div class="content" v-html="htmlContent"></div>
@@ -10,23 +11,31 @@
 <script setup>
 import { ref, onMounted, } from 'vue'
 import { useRoute } from 'vue-router'
+import { getArticleDate } from '@/utils/home_data'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
-const route = useRoute()
 
+const route = useRoute()
 const md = new MarkdownIt()
 
 const title = ref('')
 const htmlContent = ref('')
+const coverImg = ref('')
 
 onMounted(async () => {
     const slug = route.params.slug
-    const res = await fetch(`../src/content/posts/${slug}.md`)
-    const raw = await res.text()
-    htmlContent.value = md.render(raw)
-    title.value = "test_file"
-    console.log('当前要渲染的文章标识是：', slug)
-    console.log("实质渲染的位置",res)
+    const type = route.params.type
+
+    const article = getArticleDate(type, slug)
+
+    if (article) {
+        htmlContent.value = md.render(article.content)
+        title.value = article.slug
+        coverImg.value = article.cover
+    } else {
+        htmlContent.value = '<h1>文章不存在</h1>'
+    }
+
 })
 
 const BlogLinecardconfig = {
@@ -41,6 +50,11 @@ const BlogLinecardconfig = {
 </script>
 
 <style scoped>
+
+.showimg {
+    max-width: auto;
+    height: 300px;
+}
 
 .post-detail {
     max-width: 800px;

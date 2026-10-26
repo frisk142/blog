@@ -20,7 +20,7 @@
       </div>
 
       <div class="row-b">
-       <div class = "ShowImages">
+       <div class = "ShowImages" @mousedown="goToArticle(currentShowData.md?.slug, 'posts')">
          <BlogLinecard fill style = "padding: 0.25rem; ">
           <div class="img-text-stand">
             <div class="custom-font-text-stand"> 
@@ -36,7 +36,7 @@
          <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
-              hello-world
+              绘卷
             </div> 
           </div>   
            <img :src="currentBlogData.BlogImgone" alt="blog" class="img-show" :class="{ blurAnim: BlogImgBlur }" >
@@ -44,9 +44,9 @@
          </BlogLinecard> 
         </div>
 
-       <div class="blogcard">
+       <div class="blogcard"  @mousedown="goToArticle(currentBlogImgMdData.md?.slug, 'posts-2')">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
-          <div class="img-text" @mousedown="goToArticle(currenCarData.md?.slug)">
+          <div class="img-text">
             <div class="custom-font-text">
               {{ currentBlogImgMdData.md?.slug }}
             </div>
@@ -137,12 +137,13 @@ onUnmounted(() => {
 })
 
 
-const goToArticle = (slug) => {
+const goToArticle = (slug, type) => {
   console.log ('跳转', goToArticle)
   console.log ("sulg数值",slug)
   router.push({
     name: 'PostDetail',
-    params: { slug : slug }
+    params: { slug : slug , type : type}, 
+
   })
 }
 
@@ -310,7 +311,7 @@ const githubLinkconfig = {
   font-family: 'Mont-Regular', sans-serif;
   position: absolute; 
   left: 20px;
-  top: 100px;
+  top: 120px;
   font-size: 20px;
  }
 
@@ -319,7 +320,7 @@ const githubLinkconfig = {
   position: absolute; 
   font-size: 20px;
   left: 10px;
-  bottom: 30px;
+  bottom: 20px;
  }
 
  

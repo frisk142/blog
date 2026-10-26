@@ -6,20 +6,27 @@ const ShowImgMdFileModules = import.meta.glob('@/content/posts/*.md', { eager:tr
 const BlogImgoneMdFileModules = import.meta.glob('@/content/posts-2/*.md',{ eager:true , query: '?raw', import: 'default'})
 
 const getImages = (modules) => Object.values(modules).map(m => m.default)
-const getMds = (modules) => Object.entries(modules).map(([path, content]) => ({
+const getMds = (modules, imgList, type) => Object.entries(modules).map(([path, content], index) => ({
   slug: path.split('/').pop().replace(".md", ""),
-  content
+  type: type,
+  content: content,
+  cover: imgList[index % imgList.length] || ''
 }))
    
 export const ShowImgList = getImages(ShowImagesModules)
 export const BlogImgList = getImages(BlogImagesModules)
 export const BlogImgOneList = getImages(BlogImagesOneModules)
-export const ShowImgMdList = getMds(ShowImgMdFileModules)
-export const BlogImgOneMdList = getMds(BlogImgoneMdFileModules)
+export const ShowImgMdList = getMds(ShowImgMdFileModules, ShowImgList, 'posts')
+export const BlogImgOneMdList = getMds(BlogImgoneMdFileModules, BlogImgOneList, 'posts-2')
 
 const ShowmaxLen = Math.max(ShowImgList.length, ShowImgMdList.length)
 const BlogmaxLen = Math .max(BlogImgOneList.length, BlogImgOneMdList.length)
 const BlogImgmaxLen = Math.max(BlogImgList.length)
+
+export const getArticleDate = (type, slug) => {
+  const list = type ==='posts'? ShowImgMdList: BlogImgOneList
+  return list.find(item => item.slug === slug) || null
+}
 
 export const Blog_Img_List = Array.from({ length: BlogImgmaxLen }).map((_, index) => ({
   BlogImg: BlogImgList[index % BlogImgList.length] || '',
