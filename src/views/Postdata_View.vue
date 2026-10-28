@@ -1,11 +1,13 @@
 <template>
-    <BlogLinecard v-bind="BlogLinecardconfig">
-     <img class="showimg" :src="coverImg" alt="文章封面" v-if="coverImg" />
-      <div class="post-detail">
-          <h1>{{ title }}</h1>
-          <div class="content" v-html="htmlContent"></div>
-      </div>
-    </BlogLinecard>
+    <div class="row-a">
+     <BlogLinecard v-bind="BlogLinecardconfig">
+      <img class="showimg" :src="coverImg" alt="文章封面" v-if="coverImg" />
+       <div class="post-detail">
+           <h1>{{ title }}</h1>
+           <div class="content" v-html="htmlContent"></div>
+       </div>
+     </BlogLinecard>
+    </div>
 </template>
 
 <script setup>
@@ -40,11 +42,11 @@ onMounted(async () => {
 })
 
 const BlogLinecardconfig = {
-    maxWidth: '420px',
     position: 'relative',
     zIndex: "999",
     hoverable: false,
     margin: "0 auto",
+    padding: "0"
 }
 
 console.log ("当前slug:", route.params.slug)
@@ -57,10 +59,19 @@ console.log ("当前文章图片路径:", coverImg.value)
 
 <style scoped>
 
+.row-a {
+    display: grid;
+    grid-template-columns: minmax(0, 800px) 300px;
+    gap: 2rem;
+    justify-content:  center;
+    align-items: start;
+    margin-top: 2rem;
+}
+
 .showimg {
     width: 100%;
     max-width: 100%;
-    height: 300px;
+    height: 400px;
     object-fit: cover;
     border-radius: 32px 32px 0 0;
     overflow: hidden;

@@ -20,6 +20,7 @@ const props = defineProps({
     maxWidth: {type: String, default: ''},
     hoverable: {type: Boolean, default: true},
     fill: { type: Boolean, default: false }, 
+    padding: { type: String, default: '' }
 })
 const dynamicStyle = computed(() => ({
     position: props.position,
