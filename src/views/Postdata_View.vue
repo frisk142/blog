@@ -1,6 +1,6 @@
 <template>
     <BlogLinecard v-bind="BlogLinecardconfig">
-     <div class="Showimg"></div>
+     <img class="showimg" :src="coverImg" alt="文章封面" v-if="coverImg" />
       <div class="post-detail">
           <h1>{{ title }}</h1>
           <div class="content" v-html="htmlContent"></div>
@@ -58,8 +58,13 @@ console.log ("当前文章图片路径:", coverImg.value)
 <style scoped>
 
 .showimg {
-    max-width: auto;
+    width: 100%;
+    max-width: 100%;
     height: 300px;
+    object-fit: cover;
+    border-radius: 32px 32px 0 0;
+    overflow: hidden;
+    padding: '0';
 }
 
 .post-detail {
