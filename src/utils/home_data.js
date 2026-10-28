@@ -23,7 +23,7 @@ const ShowmaxLen = Math.max(ShowImgList.length, ShowImgMdList.length)
 const BlogmaxLen = Math .max(BlogImgOneList.length, BlogImgOneMdList.length)
 const BlogImgmaxLen = Math.max(BlogImgList.length)
 
-export const getArticleDate = (type, slug) => {
+export const getArticleData = (type, slug) => {
   const list = type ==='posts'? ShowImgMdList: BlogImgOneList
   return list.find(item => item.slug === slug) || null
 }

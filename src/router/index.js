@@ -12,7 +12,7 @@ const routes = [
   {path: '/test', component: Testviews},
   {path: '/postdata', component: PostdataView},
   {
-    path: '/posts/:slug',
+    path: '/posts/:type/:slug',
     name: 'PostDetail',
     component: PostdataView
   }

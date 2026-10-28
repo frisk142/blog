@@ -11,7 +11,7 @@
 <script setup>
 import { ref, onMounted, } from 'vue'
 import { useRoute } from 'vue-router'
-import { getArticleDate } from '@/utils/home_data'
+import { getArticleData } from '@/utils/home_data'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
 
@@ -26,7 +26,8 @@ onMounted(async () => {
     const slug = route.params.slug
     const type = route.params.type
 
-    const article = getArticleDate(type, slug)
+    const article = getArticleData(type, slug)
+    console.log ("article", article)
 
     if (article) {
         htmlContent.value = md.render(article.content)
@@ -45,6 +46,11 @@ const BlogLinecardconfig = {
     hoverable: false,
     margin: "0 auto",
 }
+
+console.log ("当前slug:", route.params.slug)
+console.log ("当前type:", route.params.type)
+console.log ("当前文章路径:", title.value)
+console.log ("当前文章图片路径:", coverImg.value)
 
 
 </script>

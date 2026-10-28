@@ -138,7 +138,8 @@ onUnmounted(() => {
 
 
 const goToArticle = (slug, type) => {
-  console.log ('跳转', goToArticle)
+  if (!slug) return
+  console.log ("跳转,type的值", type, "slug的值为", slug )
   console.log ("sulg数值",slug)
   router.push({
     name: 'PostDetail',
