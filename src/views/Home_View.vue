@@ -39,19 +39,18 @@
               绘卷
             </div> 
           </div>   
-           <img :src="currentBlogData.BlogImgone" alt="blog" class="img-show" :class="{ blurAnim: BlogImgBlur }" >
-            
+           <img :src="currentBlogData.BlogImg" alt="blog" class="img-show" :class="{ blurAnim: BlogImgBlur }" >
          </BlogLinecard> 
         </div>
 
-       <div class="blogcard"  @mousedown="goToArticle(currentBlogImgMdData.md?.slug, 'posts-2')">
+       <div class="blogcard"  @mousedown="goToArticle(currentBlogImgMdData.md?.slug, 'posts-2') ">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
-              {{ currentBlogImgMdData.md?.slug }}
+              {{ currentBlogImgMdData.md.slug }}
             </div>
           </div>
-            <img :src="currentBlogImgMdData.BlogImg" alt="blogcard" class="img-show" :class="{ blurAnim: BlogImgMdBlur }"  >
+            <img :src="currentBlogImgMdData.BlogImgone" alt="blogcard" class="img-show" :class="{ blurAnim: BlogImgMdBlur }"  >
         </BlogLinecard>
        </div>
       </div>
@@ -86,10 +85,10 @@ const ShowImgIndex = ref(0)
 const currentShowData = computed(() => ShowImg_MdFile_List[ShowImgIndex.value] || {})
 
 const BlogImgOneIndex = ref(0)
-const currentBlogData = computed(() => BlogImgOne_MdFile_List[BlogImgOneIndex.value] || {})
+const currentBlogImgMdData = computed(() => BlogImgOne_MdFile_List[BlogImgOneIndex.value] || {})
 
 const BlogImgIndex = ref(0)
-const currentBlogImgMdData = computed(() => Blog_Img_List[BlogImgIndex.value] || {})
+const currentBlogData = computed(() => Blog_Img_List[BlogImgIndex.value] || {})
 
 
 const ShowImgBlur = ref(false)

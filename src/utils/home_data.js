@@ -24,7 +24,7 @@ const BlogmaxLen = Math .max(BlogImgOneList.length, BlogImgOneMdList.length)
 const BlogImgmaxLen = Math.max(BlogImgList.length)
 
 export const getArticleData = (type, slug) => {
-  const list = type ==='posts'? ShowImgMdList: BlogImgOneList
+  const list = type ==='posts'? ShowImgMdList: BlogImgOneMdList
   return list.find(item => item.slug === slug) || null
 }
 

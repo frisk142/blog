@@ -18,7 +18,7 @@ import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
 
 const route = useRoute()
-const md = new MarkdownIt()
+const md = new MarkdownIt() 
 
 const title = ref('')
 const htmlContent = ref('')
@@ -51,8 +51,6 @@ const BlogLinecardconfig = {
 
 console.log ("当前slug:", route.params.slug)
 console.log ("当前type:", route.params.type)
-console.log ("当前文章路径:", title.value)
-console.log ("当前文章图片路径:", coverImg.value)
 
 
 </script>
@@ -61,7 +59,7 @@ console.log ("当前文章图片路径:", coverImg.value)
 
 .row-a {
     display: grid;
-    grid-template-columns: minmax(0, 800px) 300px;
+    grid-template-columns: minmax(0, 1000px) 300px;
     gap: 2rem;
     justify-content:  center;
     align-items: start;
