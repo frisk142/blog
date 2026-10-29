@@ -1,4 +1,5 @@
 <template>
+   <div ref="contentRightScroll" class="scrollable">
     <div class="row-a">
      <BlogLinecard v-bind="BlogLinecardconfig">
       <img class="showimg" :src="coverImg" alt="文章封面" v-if="coverImg" />
@@ -8,6 +9,7 @@
        </div>
      </BlogLinecard>
     </div>
+   </div>
 </template>
 
 <script setup>
@@ -49,6 +51,7 @@ const BlogLinecardconfig = {
     padding: "0"
 }
 
+
 console.log ("当前slug:", route.params.slug)
 console.log ("当前type:", route.params.type)
 
@@ -73,8 +76,15 @@ console.log ("当前type:", route.params.type)
     object-fit: cover;
     border-radius: 32px 32px 0 0;
     overflow: hidden;
-    padding: '0';
 }
+
+ .scrollable {
+  overflow-y: auto;
+  height: 100%; 
+  width: 100%;
+  padding-bottom: 60px;
+ }
+
 
 .post-detail {
     max-width: 800px;
@@ -82,7 +92,7 @@ console.log ("当前type:", route.params.type)
     padding: 2rem;
     color: rgba(0, 0, 0, 0.9);
     line-height: 1.8;
-    padding: 2rem, 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 .content :deep(h1)

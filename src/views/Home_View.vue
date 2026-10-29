@@ -1,5 +1,5 @@
 <template>
- <div ref="contentRightScroll" @wheel="wheelHandler" class="scrollable">
+ <div ref="contentRightScroll"  class="scrollable">
   <div class="page-bg">
      <div class="home-layout">
       <div class="row-a">
@@ -73,7 +73,6 @@ import "@/assets/fonts/fonts.css"
 import { useRouter } from 'vue-router'
 import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, Blog_Img_List,} from '../utils/home_data.js';
 
-const contentRightScroll = ref(null)
 const router = useRouter()
 
 defineOptions({
@@ -111,17 +110,17 @@ onMounted (() => {
   timer_1 = setInterval(() => {
     BlogImgBlur.value = true
     setTimeout(() => {
-      BlogImgOneIndex.value = (BlogImgOneIndex.value + 1) % BlogImgOne_MdFile_List.length
+      BlogImgIndex.value = (BlogImgIndex.value + 1) % Blog_Img_List.length
       setTimeout(() => {
         BlogImgBlur.value = false
-      }, 600);
+      }, 600)
     }, 400)
   }, 6500)
   
   timer_2 = setInterval(() => {
     BlogImgMdBlur.value = true
     setTimeout(() => {
-      BlogImgIndex.value = (BlogImgIndex.value + 1 ) % Blog_Img_List.length
+      BlogImgOneIndex.value = (BlogImgOneIndex.value + 1 ) % BlogImgOne_MdFile_List.length
       setTimeout(() => {
         BlogImgMdBlur.value = false
       }, 600)
@@ -147,13 +146,6 @@ const goToArticle = (slug, type) => {
   })
 }
 
-const wheelHandler = (event) => {
-  if (contentRightScroll.value) {
-    contentRightScroll.value.scrollTop += event.deltaY;
-    console.log('scrollTop:', contentRightScroll.value.scrollTop);
-    event.preventDefault();
-  }
-}
 
 console.log ("Showimg:", currentShowData)
 console.log ("BlogImg:", currentBlogData)

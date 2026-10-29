@@ -57,8 +57,14 @@ onUnmounted(() => {
 html, body{
   position: relative;
   height: 100%; 
-  overflow: hidden;
   background: url(/images/Home_View.jpg) center/cover no-repeat fixed;
+}
+
+.app-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  overflow: hidden;
 }
 
 .app-wrap::before{
@@ -76,6 +82,7 @@ nav {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   z-index: 999;
+  flex-shrink: 0;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -88,6 +95,11 @@ nav a{
   color: rgba(255, 255, 255, 0.9);
   margin: 0 0.5rem;
   text-decoration: none;
+}
+
+.app-wrap > :nth-child(2) {
+  flex: 1;
+  overflow: hidden;
 }
 
 nav.visible {
