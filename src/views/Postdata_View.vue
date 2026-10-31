@@ -8,6 +8,7 @@
            <div class="content" v-html="htmlContent"></div>
        </div>
      </BlogLinecard>
+     <MusicPlayer/>
     </div>
    </div>
 </template>
@@ -18,6 +19,7 @@ import { useRoute } from 'vue-router'
 import { getArticleData } from '@/utils/home_data'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
+import MusicPlayer from '@/components/MusicPlayer.vue'
 
 const route = useRoute()
 const md = new MarkdownIt() 
@@ -62,7 +64,7 @@ console.log ("当前type:", route.params.type)
 
 .row-a {
     display: grid;
-    grid-template-columns: minmax(0, 1000px) 300px;
+    grid-template-columns: minmax(0, 800px) 400px;
     gap: 2rem;
     justify-content:  center;
     align-items: start;
