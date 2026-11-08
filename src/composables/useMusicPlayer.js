@@ -5,6 +5,9 @@ let audio = null
 const isPlaying = ref(false) 
 const volume = ref(0.5)
 const duration = ref(0)
+const currentTime = ref(0)
+const currentSongIndex = ref(0)
+const songlist = ref(songs)
 
 
 function getAudio() {
@@ -20,9 +23,22 @@ function getAudio() {
         duration.value = audio.duration
     })
 
-    audio.addEventListener("volumechange", () => {
+    audio.addEventListener("loadedmetadata", () => {
+        duration.value = audio.duration
+    })
 
-    
+    audio.addEventListener("timeupdate", () => {
+        currentTime.value = audio.currentTime
+    })
 
+    audio.addEventListener("nextsong", () => {
+        nextSong()
+    })
 
+    return audio
 }
+
+const currentSong = computed(() => 
+    songlist.value[currentSongIndex.value] || null)
+
+function loadAnd
