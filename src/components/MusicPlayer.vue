@@ -8,7 +8,7 @@
     <div class="menu-btn" @click="showPlaylist"></div>
     <div class="play-skip-back-btn" @click="prevSong"></div>
     <div class="Playbtn" :style="{ backgroundImage: `url(${isPlaying ? '/icon/player-pause.svg' : '/icon/player-play.svg'})` }" @click="toggleplay"></div>
-    <div class="play-skip-forward-btn" @click="nextsong"></div>
+    <div class="play-skip-forward-btn" @click="nextSong"></div>
 
     <div class="volume-btn" @click="showVolumeBar">
       <div v-if="volumebar" class="volume-slider-container">
@@ -31,7 +31,7 @@
     v-for="song in songsList"
     :key="song.id"
     class="playlist-item"
-    @click="playSong(song)"
+    @click="playsong(song)"
   >
   <span>{{ song.title }}</span>
     </div>
@@ -57,7 +57,7 @@
 
 <script setup>
 import {ref, computed, onMounted,} from 'vue'
-import {songs} from '@/config/songs'
+import {useMusicPlayer} from '@/composables/useMusicPlayer'
 
 const props = defineProps({
   position: {type: String, default:'static'},
@@ -82,50 +82,18 @@ const dynamicStyle = computed(() => ({
 }))
 
 
-const audio = ref(null)
-const isPlaying = ref(false) // 播放
-const currentTime = ref(0)  // 播放时长
-const duration = ref(0)  // 总时长
-const volume = ref(0.8)  // 音量
-const currenSongIndex = ref(0)  //
-const songsList = ref(songs)  // 歌曲列表
 const Playlist = ref(false)  // 播放列表
 const volumebar = ref(false)  // 音量条
+const { isPlaying, currentTime, duration, volume,
+    songsList, currentSong,
+    init, toggleplay, playsong, prevSong, nextSong,
+    seekTo, adjustVolume, formatTime } = useMusicPlayer()
 
 
 onMounted(() => {
-  audio.value = new Audio()
-  audio.value.volume = volume.value
-
-  // 绑定所有事件
-  audio.value.addEventListener("canplay", () => {
-    console.log('canplay')
-  })
-
-  audio.value.addEventListener("loadedmetadata", () => {
-    duration.value = audio.value.duration
-    console.log('loadmetadata', duration.value)
-  })
-
-  audio.value.addEventListener("timeupdate", () => {
-    currentTime.value = audio.value.currentTime
-    // console.log('timeupdate', currentTime.value, "paused:", audio.value.paused, "loaded:", duration.value)
-  })
-
-  if (songsList.value.length > 0){
-    audio.value.src = songsList.value[0].src
-    currenSongIndex.value = 0
-  }
-
-  audio.value.load()
-  console.log('audio loaded', audio.value.src)
-
+  init()
 })
 
-
-const currentSong = computed(() => {
-    return songsList.value[currenSongIndex.value] || null
-})
 
 const showPlaylist = () => {
   Playlist.value = !Playlist.value
@@ -137,88 +105,6 @@ const showVolumeBar = () => {
   console.log('showVolumeBar', volumebar.value)
 }
 
-//播放与暂停
-const toggleplay = () => { 
-  console.log('toggleplay')
-    if (!audio.value) return
-    if (isPlaying.value){
-        audio.value.pause()
-        console.log('暂停')
-        console.log('currentTime:', currentTime)
-    } else {
-        audio.value.play() 
-        console.log('播放')
-
-    }
-    isPlaying.value = !isPlaying.value
-}
-
-//播放指定歌曲
-const playSong = (song) => {
-    const index = songsList.value.findIndex(s => s.id === song.id)
-    if (index === -1) return
-    currenSongIndex.value = index
-    if (audio.value) {
-        audio.value.src = song.src
-        audio.value.load()
-        audio.value.play()
-        isPlaying.value = true
-    }
-    console.log('playSong', song.title, currenSongIndex.value)
-}
-
-//上一曲
-const prevSong = () => { 
-    const total = songsList.value.length
-    currenSongIndex.value = (currenSongIndex.value - 1 + total) % total
-    if (audio.value) {
-        audio.value.src = currentSong.value.src
-        audio.value.load()
-        audio.value.play()
-        isPlaying.value = true
-    }
-    console.log('prevSong', currentSong.value.title, currenSongIndex.value)
-}
-
-//下一曲
-const nextsong = () => {
-    const total = songsList.value.length
-    currenSongIndex.value= (currenSongIndex.value + 1) % total
-    if (audio.value) {
-        audio.value.src = currentSong.value.src
-        audio.value.load()
-        audio.value.play()
-        isPlaying.value = true
-    }
-    console.log('nextsong', currentSong.value.title, currenSongIndex.value)
-}
-
-// 跳转到指定进度
-const seekTo = (event) => {
-  const val = parseFloat(event.target.value)
-  if (audio.value) {
-    audio.value.currentTime = val
-    console.log('seekTo', val, audio.value.currentTime)
-  }
-}
-
-// 调整音量
-const adjustVolume = (event) => {
-    const val = parseFloat(event.target.value)
-    volume.value = val
-    if (audio.value) {  
-        audio.value.volume = val
-    } 
-    console.log('adjustVolume', val, audio.value.volume)
-}
-
-// 格式化时间
-const formatTime = (seconds) => {
-    if (! seconds || isNaN(seconds)) return '0.00'
-    const mins = Math.floor(seconds / 60)
-    const secs = Math.floor(seconds % 60)
-    return `${mins}: ${secs.toString().padStart(0,'0')}`
-}
 
 
 </script>

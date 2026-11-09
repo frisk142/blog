@@ -1,4 +1,4 @@
-import {songs} from '@/data/songs.js'
+import {songs} from '@/config/songs.js'
 import {ref, computed} from 'vue'
 
 let audio = null
@@ -50,7 +50,7 @@ function loadAndPlay(index) {
 
     currentSongIndex.value = index
     currentTime.value = 0
-    a.src = song.url
+    a.src = song.src
     a.load()
     a.play().catch((error) => {
         console.error("Error playing audio:", error)
@@ -61,8 +61,9 @@ function loadAndPlay(index) {
 // 初始化
 function init () {
     const a = getAudio()
-    if (!a.src || songsList.value.length > 0) {
-        a.src = songsList.value[0].url
+    if (!a.src && songsList.value.length > 0) {
+        a.src = songsList.value[0].src
+        console.log("输出的src",a.src)
         currentSongIndex.value = 0
         a.load()
     }
@@ -113,7 +114,7 @@ function adjustVolume(event) {
 
 function formatTime(seconds) {
     if (! seconds || isNaN(seconds)) return '00:00'
-    const mins = Math.floor
+    const mins = Math.floor(seconds / 60)
     const secs = Math.floor(seconds % 60)
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
 }
