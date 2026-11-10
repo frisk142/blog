@@ -20,7 +20,7 @@
       </div>
 
       <div class="row-b">
-       <div class = "ShowImages" @mousedown="goToArticle(currentShowData.md?.slug, 'posts')">
+       <div class = "ShowImages" @click="goToArticle(currentShowData.md?.slug, 'posts')">
          <BlogLinecard fill style = "padding: 0.25rem; ">
           <div class="img-text-stand">
             <div class="custom-font-text-stand"> 
@@ -32,7 +32,7 @@
        </div>
 
        <div class="row-b-right">
-        <div class="blog">
+        <div class="blog" @click="goToGallery">
          <BlogLinecard  fill style = "padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
@@ -43,7 +43,7 @@
          </BlogLinecard> 
         </div>
 
-       <div class="blogcard"  @mousedown="goToArticle(currentBlogImgMdData.md?.slug, 'posts-2') ">
+       <div class="blogcard"  @click="goToArticle(currentBlogImgMdData.md?.slug, 'posts-2') ">
         <BlogLinecard fill style="padding: 0.25rem; position: relative">
           <div class="img-text">
             <div class="custom-font-text">
@@ -143,6 +143,13 @@ const goToArticle = (slug, type) => {
     name: 'PostDetail',
     params: { slug : slug , type : type}, 
 
+  })
+}
+
+const goToGallery = () => {
+  console.log ("跳转到绘卷页")
+  router.push({
+    name: 'GalleryView',
   })
 }
 

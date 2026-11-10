@@ -6,6 +6,7 @@
       <router-link to = "/about">关于我</router-link>
       <router-link to = "/test">组件测试页</router-link>
       <router-link to = '/postdata'>文章页</router-link>
+      <router-link to = '/gallery'>绘卷</router-link>
     </nav>
     
     <router-view v-slot="{ Component }">

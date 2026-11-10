@@ -4,6 +4,7 @@ import HomeView from '../views/Home_View.vue'
 import AboutView from '../views/About_View.vue'
 import Testviews from '../views/Test_view.vue'
 import PostdataView from '../views/Postdata_View.vue'
+import GalleryView from '../views/Gallery_View.vue'
 
 
 const routes = [
@@ -15,7 +16,10 @@ const routes = [
     path: '/posts/:type/:slug',
     name: 'PostDetail',
     component: PostdataView
-  }
+  },
+  {path: '/gallery',
+   name: 'GalleryView',
+   component: GalleryView}
 ]
 
 
