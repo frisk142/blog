@@ -216,6 +216,7 @@ const githubLinkconfig = {
  .row-a{
   display:grid;
   grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
  }
 
  .row-b{
@@ -317,25 +318,23 @@ const githubLinkconfig = {
 
  
 @media (max-width: 768px) {
-  .home-layout {
-    padding: 100px 1rem 1rem;
-  }
+  .home-layout { padding: 100px 1rem 1rem; }
   .row-a {grid-template-columns: 1fr;}
-  .row-b {grid-template-areas: 
-    "ShowImages"
-    "blog"
-    "blogcard"
-  ;}
+  .row-b {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: none;}
+
+  .row-b-right {
+    grid-column: auto;
+    grid-template-rows: auto;
+  }
+
   .row-c {grid-template-columns: 1fr;}
 }
 
 </style>
 
 <style>
- .blogcard {grid-area: blogcard};
- .ShowImages {grid-area: ShowImages};
- .blog {grid-area: blog};
- .blogcard-1 {grid-area: blogcard-1};
- .row-b-right {grid-area: row-b-right};
 
 </style>
