@@ -71,7 +71,7 @@ import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import "@/assets/fonts/fonts.css"
 import { useRouter } from 'vue-router'
-import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, Blog_Img_List,} from '../utils/home_data.js';
+import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, Blog_Img_List,} from '../data/home_data.js';
 
 const router = useRouter()
 

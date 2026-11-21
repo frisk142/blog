@@ -16,7 +16,7 @@
 <script setup>
 import { ref, onMounted, } from 'vue'
 import { useRoute } from 'vue-router'
-import { getArticleData } from '@/utils/home_data'
+import { getArticleData } from '@/data/home_data'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'

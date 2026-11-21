@@ -1,42 +1,30 @@
 <template>
   <div class="page">
-    <MusicPlayer v-bind="MusicPlayerConfig" />
-    <ProfileComponent v-bind="profileconfig" />
+    <gallery-cover v-bind="galleryconfig" />
   </div>
 </template>
 
 <script setup>
-import MusicPlayer from '@/components/MusicPlayer.vue';
-import ProfileComponent from '@/components/profile-component.vue';
-import { fanImages } from '@/utils/gallery_data.js';
+import GalleryCover from '@/components/GalleryCover.vue';
 
 
 defineOptions({
   name: 'TestView'
 });
 
-const MusicPlayerConfig = {
-  position: 'fixed',
-  top: '200px',
-  right: '200px',
-  width: '350px',
-  height: '200px'
-};
-
-const profileconfig = {
-  width: '400px',
-  height: 'auto',
-  zindex: '20',
-};
+const galleryconfig = {
+  width: '600px',
+  height: '500px',
+}
 </script>
 
-<style>
+
+<style scoped>
 .page {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
-  /* 移除 z-index: -1 */
 }
 
 .frame {
@@ -51,7 +39,7 @@ const profileconfig = {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
-  brorder-radius: 5px;
+  border-radius: 5px;
 }
 
 </style>
