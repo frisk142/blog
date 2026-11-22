@@ -1,19 +1,19 @@
 <template>
     <div class="gallery" :style="dynamicStyle">
         <div class="photo-stack">
-            <div class="photo-card back-left" style="--rot: -8deg">
+            <div class="photo-card back-left" >
                 <img :src="fan_images[0].name" alt="">
             </div>
 
-            <div class="photo-card back-right" style="--rot: 8deg">
+            <div class="photo-card back-right" >
                 <img :src="fan_images[1].name" alt="">
             </div>
 
-            <div class="photo-card front" style="--rot: 0deg">
+            <div class="photo-card front" >
                 <img :src="fan_images[2].name" alt="">
                 <div class="front-overlay">
-                    <h3>青春是一个梦</h3>
-                    <p>我们还有很长的路要走，不过没关系，道路就是生活。 ---凯鲁亚克-.</p>
+                    <h3>{{ props.title }}</h3>
+                    <p>{{ props.desc }}</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,9 @@ const props = defineProps({
     maxWidth: {type: String, default: ''},
     hoverable: {type: Boolean, default: true},
     fill: { type: Boolean, default: false }, 
-    padding: { type: String, default: '' }
+    padding: { type: String, default: '' },
+    title: { type: String, default: '' },
+    desc: { type: String, default: '' },
 })
 
 const dynamicStyle = computed(() => ({
@@ -52,6 +54,8 @@ const dynamicStyle = computed(() => ({
     height: props.height,
     maxWidth: props.maxWidth,
     padding: props.padding,
+    title: props.title,
+    desc: props.desc,
 }))
 
 const fan_images = fanImages
@@ -68,13 +72,14 @@ console.log(fan_images)
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  overflow: hidden; 
 }
 
 
 .photo-card {
   position: absolute;
   top: 50%; left: 50%;
-  width: 60%;
+  width: 70%;
   aspect-ratio: 4 / 3;
   background: #fff;
   padding: 8px;
@@ -85,9 +90,17 @@ console.log(fan_images)
 }
 
 
-.back-left, .back-right {
+.back-left {
+  top: 50%;
   opacity: 0.7;
   z-index: 3;
+}
+
+.back-right {
+  top:45%;
+  right: 5%;
+  opacity: 0.7;
+  z-index: 2;
 }
 
 
