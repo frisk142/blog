@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <gallery-cover v-bind="galleryconfig" />
+    <gallery-cover v-bind="galleryconfig_1"/>
   </div>
 </template>
 
@@ -19,13 +20,18 @@ const galleryconfig = {
   images: fanImages,
   title: '青春是一场梦',
   desc: '你无法游向新的地平线，直到你有勇气告别海岸。 -威廉·福克纳-',
+}
 
+const galleryconfig_1 = {
+  width: '600px',
+  height: '500px'
 }
 </script>
 
 
 <style scoped>
 .page {
+  display: grid;
   margin: 0;
   padding: 0;
   width: 100vw;

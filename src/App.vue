@@ -1,4 +1,5 @@
 <template>
+ <div class="app-container">
   <div class="app-wrap">
     <nav
     :class="{ visible: isVisible }">
@@ -15,6 +16,7 @@
       </keep-alive>
     </router-view>
   </div>
+ </div>
 </template>
 
 <script setup>
@@ -55,6 +57,29 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
+.app-container {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
 html, body{
   position: relative;
   height: 100%; 
@@ -64,7 +89,7 @@ html, body{
 .app-wrap {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
+  min-height: 100vh; 
   overflow: hidden;
 }
 
@@ -105,5 +130,10 @@ nav a{
 
 nav.visible {
   transform: translateY(0);
+}
+
+*{
+  scrollbar-width: thin;
+  crollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 </style>

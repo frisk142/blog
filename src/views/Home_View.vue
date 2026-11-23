@@ -1,5 +1,4 @@
 <template>
- <div ref="contentRightScroll"  class="scrollable">
   <div class="page-bg">
      <div class="home-layout">
       <div class="row-a">
@@ -56,7 +55,6 @@
       </div>
     </div>
    </div> 
-  </div>
 </div>
 
 </template>
@@ -202,11 +200,6 @@ const githubLinkconfig = {
   background-attachment: fixed;
  }
 
- .scrollable {
-  overflow-y: scroll;
-  height: 100vh;
-  width: 100vw;
- }
 
  ::-webkit-scrollbar-track{
   background-color: rgba(255,255,255,0.1);
