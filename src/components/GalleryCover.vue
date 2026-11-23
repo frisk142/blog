@@ -1,16 +1,16 @@
 <template>
     <div class="gallery" :style="dynamicStyle">
         <div class="photo-stack">
-            <div class="photo-card back-left" >
-                <img :src="fan_images[0].name" alt="">
+            <div class="photo-card back-left" style="--rot: -8deg">
+                <img :src="imgLeft" alt="">
             </div>
 
-            <div class="photo-card back-right" >
-                <img :src="fan_images[1].name" alt="">
+            <div class="photo-card back-right" style="--rot: 8deg">
+                <img :src="imgRight" alt="">
             </div>
 
             <div class="photo-card front" >
-                <img :src="fan_images[2].name" alt="">
+                <img :src="imgFront" alt="">
                 <div class="front-overlay">
                     <h3>{{ props.title }}</h3>
                     <p>{{ props.desc }}</p>
@@ -22,7 +22,6 @@
 
 <script setup>
 import {computed} from 'vue'
-import fanImages from '@/data/gallery_data.js'
 
 const props = defineProps({
     position: {type: String, default:''},
@@ -40,6 +39,7 @@ const props = defineProps({
     padding: { type: String, default: '' },
     title: { type: String, default: '' },
     desc: { type: String, default: '' },
+    images: { type: Array, default: () => [] },
 })
 
 const dynamicStyle = computed(() => ({
@@ -54,14 +54,11 @@ const dynamicStyle = computed(() => ({
     height: props.height,
     maxWidth: props.maxWidth,
     padding: props.padding,
-    title: props.title,
-    desc: props.desc,
 }))
 
-const fan_images = fanImages
-
-console.log(fan_images)
-
+const imgLeft = computed(() => props.images[1] || props.images[0] || '')
+const imgRight = computed(() => props.images[2] || props.images[0] || '')
+const imgFront = computed(() => props.images[0] || '')
 
 </script>
 
@@ -85,20 +82,19 @@ console.log(fan_images)
   padding: 8px;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
-  transition: all 0.3s ease;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: all 0.4s ease;
 }
 
 
 .back-left {
-  top: 50%;
+  transform: translate(-55%, -50%) rotate(-8deg) !important; 
   opacity: 0.7;
   z-index: 3;
 }
 
 .back-right {
-  top:45%;
-  right: 5%;
+  transform: translate(-45%, -50%) rotate(8deg) !important;
   opacity: 0.7;
   z-index: 2;
 }
@@ -110,15 +106,15 @@ console.log(fan_images)
 }
 
 .photo-stack:has(.front:hover) .back-left {
-  transform: translate(-60%, -50%) rotate(-15deg);
+  transform: translate(-62%, -50%) rotate(-15deg) !important;
 }
 
 .photo-stack:has(.front:hover) .back-right {
-  transform: translate(-40%, -50%) rotate(15deg);
+  transform: translate(-38%, -50%) rotate(15deg) !important;
 }
 
 .photo-stack:has(.front:hover) .front {
-  transform: translate(-50%, -50%) rotate(0deg) scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 

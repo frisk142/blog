@@ -6,6 +6,7 @@
 
 <script setup>
 import GalleryCover from '@/components/GalleryCover.vue';
+import fanImages from '@/data/gallery_data';
 
 
 defineOptions({
@@ -15,6 +16,10 @@ defineOptions({
 const galleryconfig = {
   width: '600px',
   height: '500px',
+  images: fanImages,
+  title: '青春是一场梦',
+  desc: '你无法游向新的地平线，直到你有勇气告别海岸。 -威廉·福克纳-',
+
 }
 </script>
 
