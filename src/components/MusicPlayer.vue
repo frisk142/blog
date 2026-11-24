@@ -1,7 +1,7 @@
 <template>
 <div class="MusicPlay" :style="dynamicStyle">
   <div class="song-info">
-    <div class="song-title">{{ currentSong?.title || '未选择歌曲' }}</div>
+    <div class="song-title font-text">{{ currentSong?.title || '未选择歌曲' }}</div>
   </div>
 
   <div class="music-icon">
@@ -58,6 +58,7 @@
 <script setup>
 import {ref, computed, onMounted,} from 'vue'
 import {useMusicPlayer} from '@/composables/useMusicPlayer'
+import "../assets/fonts/fonts.css"
 
 const props = defineProps({
   position: {type: String, default:'static'},
@@ -286,6 +287,10 @@ const showVolumeBar = () => {
   background-color: rgba(0, 255, 255, 0.9);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
   transform: scale(1.05);
+}
+
+.font-text {
+  font-family: 'ZhouFangRi', sans-serif;
 }
 
 </style>

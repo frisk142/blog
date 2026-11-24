@@ -5,9 +5,9 @@
        <BlogLinecard>
         <div class="profile-wrap">
           <AvatarComponent v-bind="avatarconfig"/>
-          <div class="name-Format">
+          <div class="name-Format font-text">
             <h3>{{ ProFile.name }}</h3>
-            <p class="small-text">{{ ProFile.title }}</p>
+            <p class="small-text font-text">{{ ProFile.title }}</p>
             <div class='link-group'>
              <LinkCard v-bind="biliLInkCardconfig"/>
              <LinkCard v-bind="githubLinkconfig"/>
@@ -316,6 +316,9 @@ const githubLinkconfig = {
   bottom: 20px;
  }
 
+ .font-text {
+  font-family: 'ZhouFangRi', sans-serif;
+ }
  
 @media (max-width: 768px) {
   .home-layout { padding: 100px 1rem 1rem; }
