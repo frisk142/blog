@@ -7,19 +7,29 @@
 
 <script setup>
 import GalleryCover from '@/components/GalleryCover.vue';
-import fanImages from '@/data/gallery_data';
+import { galleryAlbums } from '@/data/gallery_data';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
+const albumCover = galleryAlbums[0]
 
 defineOptions({
   name: 'TestView'
 });
 
+// const goToDatail = () =>{
+//   router.push({
+//     name: 'GalleryDetail',
+//     params: { id: albumCover.id }
+//   })
+// }
+
 const galleryconfig = {
   width: '600px',
   height: '500px',
-  images: fanImages,
-  title: '青春是一场梦',
-  desc: '你无法游向新的地平线，直到你有勇气告别海岸。 -威廉·福克纳-',
+  images: albumCover.coverImages,
+  title: albumCover.title,
+  desc: albumCover.desc,
 }
 
 const galleryconfig_1 = {

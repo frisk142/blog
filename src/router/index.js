@@ -9,17 +9,28 @@ import GalleryView from '../views/Gallery_View.vue'
 
 const routes = [
   {path: '/', component: HomeView},
+
   {path: '/about', component: AboutView},
+
   {path: '/test', component: Testviews},
+
   {path: '/postdata', component: PostdataView},
+
   {
     path: '/posts/:type/:slug',
     name: 'PostDetail',
     component: PostdataView
   },
+
   {path: '/gallery',
    name: 'GalleryView',
-   component: GalleryView}
+   component: GalleryView
+  },
+
+  {path: '/gallery/:id',
+   name: 'Gallerydetail',
+   component: () => import('@/views/Gallerydetail_view.vue')
+  }
 ]
 
 

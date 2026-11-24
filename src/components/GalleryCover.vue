@@ -88,6 +88,7 @@ const imgFront = computed(() => props.images[0] || '')
 
 
 .back-left {
+  top: 55%;
   transform: translate(-55%, -50%) rotate(-8deg) !important; 
   opacity: 0.7;
   z-index: 3;
