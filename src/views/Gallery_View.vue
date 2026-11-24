@@ -17,12 +17,12 @@ defineOptions({
   name: 'TestView'
 });
 
-// const goToDatail = () =>{
-//   router.push({
-//     name: 'GalleryDetail',
-//     params: { id: albumCover.id }
-//   })
-// }
+const goToDatail = () =>{
+  router.push({
+    name: 'GalleryDetail',
+    params: { id: albumCover.id }
+  })
+}
 
 const galleryconfig = {
   width: '600px',

@@ -67,7 +67,7 @@ import BlogLinecard from '../components/Blog-Linecard.vue'
 import {ProFile} from '@/config/ProFile.js'
 import LinkCard from '@/components/Link-Card.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
-import "@/assets/fonts/fonts.css"
+import "../assets/fonts/fonts.css"
 import { useRouter } from 'vue-router'
 import { ShowImg_MdFile_List, BlogImgOne_MdFile_List, Blog_Img_List,} from '../data/home_data.js';
 
@@ -301,7 +301,7 @@ const githubLinkconfig = {
  }
 
  .custom-font-text {
-  font-family: 'Mont-Regular', sans-serif;
+  font-family: 'ZhouFangRi', sans-serif;
   position: absolute; 
   left: 20px;
   top: 120px;
@@ -309,7 +309,7 @@ const githubLinkconfig = {
  }
 
  .custom-font-text-stand {
-  font-family: 'Mont-Regular', sans-serif;
+  font-family: 'ZhouFangRi', sans-serif;
   position: absolute; 
   font-size: 20px;
   left: 10px;
