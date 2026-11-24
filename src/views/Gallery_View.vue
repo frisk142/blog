@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <gallery-cover v-bind="galleryconfig" />
+    <gallery-cover @click="goToDatail()" v-bind="galleryconfig" />
     <gallery-cover v-bind="galleryconfig_1"/>
   </div>
 </template>
@@ -18,8 +18,9 @@ defineOptions({
 });
 
 const goToDatail = () =>{
+  console.log("gotoDatail已触发")
   router.push({
-    name: 'GalleryDetail',
+    name: 'Gallerydetail',
     params: { id: albumCover.id }
   })
 }

@@ -11,7 +11,7 @@
 
             <div class="photo-card front" >
                 <img :src="imgFront" alt="">
-                <div class="front-overlay">
+                <div class="front-overlay font-text">
                     <h3>{{ props.title }}</h3>
                     <p>{{ props.desc }}</p>
                 </div>
@@ -22,6 +22,7 @@
 
 <script setup>
 import {computed} from 'vue'
+import "../assets/fonts/fonts.css"
 
 const props = defineProps({
     position: {type: String, default:''},
@@ -150,5 +151,9 @@ const imgFront = computed(() => props.images[0] || '')
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
+}
+
+.font-text {
+  font-family: 'ZhouFangRi', sans-serif;
 }
 </style>

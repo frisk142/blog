@@ -2,7 +2,7 @@
     <div class="gallery-detail-page">
       <div v-if="currentAlbum" class="detail-content">
         <header class="page-header">
-          <button class="back-ctn font-text" @click="$router.back()">返回</button>
+          <button class="back-btn font-text" @click="$router.back()">←返回</button>
           <h1>{{ currentAlbum.title }}</h1>
           <p class="desc">{{ currentAlbum.desc }}</p>
         </header>
@@ -12,7 +12,7 @@
            v-for= "(img, index) in currentAlbum.allImages"
            :key= "index"
            :src= "img"
-           :alt= "相册图片"
+           alt= "相册图片"
            loading= "lazy"
            />
       </div>
@@ -29,7 +29,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { getAlbumDetail } from '@/data/gallery_data';
-import "@assets/fonts/fonts.css"
+import "../assets/fonts/fonts.css"
 
 const router = useRoute()
 
@@ -58,21 +58,24 @@ const currentAlbum = computed(() => {
 
 .back-btn {
   background: rgba(255, 255, 255, 0.2);
-  border: none;
   color: #fff;
+  border: none;
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
   margin-bottom: 20px;
   transition: background 0.3s;
 }
+
 .back-btn:hover {
   background: rgba(255, 255, 255, 0.4);
 }
+
 h1 {
   font-size: 2rem;
   margin-bottom: 10px;
 }
+
 .desc {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
@@ -84,6 +87,7 @@ h1 {
 }
 
 .image-grid img {
+  position: relative;
   width: 100%;
   margin-bottom: 20px;
   border-radius: 12px;
@@ -91,6 +95,7 @@ h1 {
   break-inside: avoid;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 1;
 }
 
 .image-grid img:hover {
