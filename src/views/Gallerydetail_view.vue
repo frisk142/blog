@@ -2,10 +2,27 @@
     <div class="gallery-detail-page">
       <div v-if="currentAlbum" class="detail-content">
         <header class="page-header">
-          <button class="back-ctn" @click="$router.back()">返回</button>
+          <button class="back-ctn font-text" @click="$router.back()">返回</button>
+          <h1>{{ currentAlbum.title }}</h1>
+          <p class="desc">{{ currentAlbum.desc }}</p>
         </header>
+
+        <div class="image-grid">
+          <img
+           v-for= "(img, index) in currentAlbum.allImages"
+           :key= "index"
+           :src= "img"
+           :alt= "相册图片"
+           loading= "lazy"
+           />
       </div>
-    </div>   
+    </div>  
+
+    <div v-else class="not-found">
+      <h2>哎呀，相册走丢了(404)</h2>
+      <button class="back-btn" @click="$router.push('/')">回到首页</button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -94,6 +111,10 @@ h1 {
 .not-found {
   text-align: center;
   margin-top: 100px;
+}
+
+.font-text {
+  font-family: 'ZhouFangRi', sans-serif;
 }
 
 </style> 

@@ -20,6 +20,7 @@ import { getArticleData } from '@/data/home_data'
 import MarkdownIt from 'markdown-it'
 import BlogLinecard from '@/components/Blog-Linecard.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
+import "../assets/fonts/fonts.css"
 
 const route = useRoute()
 const md = new MarkdownIt() 
@@ -107,6 +108,10 @@ console.log ("当前type:", route.params.type)
     background-color: rgba(255,255,255,0.1);
     padding: 2px 6px;
     border-radius: 4px;
+}
+
+.font-tetx {
+    font-family: 'ZhouFangRi', sans-serif;
 }
 
 
