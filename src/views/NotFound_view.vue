@@ -91,7 +91,6 @@
 }
 
 .btn.primary:hover {
-  transform: translateY(-3px);
   box-shadow: 0 5px 25px rgba(0, 243, 255, 0.6);
 }
 
@@ -103,7 +102,6 @@
 
 .btn.secondary:hover {
   background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
 }
 
 

@@ -9,9 +9,11 @@
     </nav>
     
     <router-view v-slot="{ Component }">
-      <keep-alive include="HomeView">
-        <component :is="Component" />
-      </keep-alive>
+      <transition name="fade-slide" mode="out-in">
+       <keep-alive include="HomeView">
+         <component :is="Component" />
+       </keep-alive>
+      </transition>
     </router-view>
   </div>
  </div>
@@ -128,6 +130,19 @@ nav a{
 
 nav.visible {
   transform: translateY(0);
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 *{

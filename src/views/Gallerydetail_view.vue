@@ -37,6 +37,8 @@ const currentAlbum = computed(() => {
   return getAlbumDetail(router.params.id)
 })
 
+console.log(currentAlbum)
+
 </script>
 
 <style scoped>

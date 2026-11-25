@@ -1,4 +1,4 @@
-const galleryimages = import.meta.glob('@/assets/gallery_images/*.{jpg,png,jpeg}',{
+const galleryimages = import.meta.glob('@/assets/gallery_images/*.{jpg,png,jpeg,webp}',{
     eager: true,
     import: 'default'
 });
