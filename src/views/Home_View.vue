@@ -322,18 +322,24 @@ const githubLinkconfig = {
  
 @media (max-width: 768px) {
   .home-layout { padding: 100px 1rem 1rem; }
-  .row-a {grid-template-columns: 1fr;}
-  .row-b {
+  .row-a, .row-b, .row-c, .row-b-right{
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: none;}
+  }
 
-  .row-b-right {
-    grid-column: auto;
+  .row-b {
+    grid-template-areas: none;
     grid-template-rows: auto;
   }
 
-  .row-c {grid-template-columns: 1fr;}
+  .row-b-right {
+    grid-column: auto;
+  }
+
+  .row-b > * {
+    height: auto;
+    width: auto;
+  }
+
 }
 
 </style>
