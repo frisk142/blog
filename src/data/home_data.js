@@ -41,5 +41,3 @@ export const BlogImgOne_MdFile_List = Array.from({ length: BlogmaxLen }).map((_,
   BlogImgone: BlogImgOneList[index % BlogImgOneList.length] || '',
   md: BlogImgOneMdList[index % BlogImgOneMdList.length] || null,
 }))
-
-

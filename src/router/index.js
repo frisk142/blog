@@ -1,35 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeView from '../views/Home_View.vue'
-import AboutView from '../views/About_View.vue'
-import Testviews from '../views/Test_view.vue'
-import PostdataView from '../views/Postdata_View.vue'
-import GalleryView from '../views/Gallery_View.vue'
-
+import HomeView from '@/views/Home_View.vue'
 
 const routes = [
-  {path: '/', component: HomeView},
+  { path: '/',
+    name: 'HomeView',
+    component: HomeView
+  },
 
-  {path: '/about', component: AboutView},
+  { path: '/about',
+    name: 'AboutView',
+    component: () => import('@/views/About_View.vue')
+  },
 
-  {path: '/test', component: Testviews},
+  { path: '/test', 
+    name: 'Testviews',
+    component: () => import('@/views/Test_view.vue')
+  },
 
-  {path: '/postdata', component: PostdataView},
+  { path: '/postdata',
+    name: 'PostdataView', 
+    component: () => import('@/views/Postdata_View.vue')
+  },
 
-  {
-    path: '/posts/:type/:slug',
+  { path: '/posts/:type/:slug',
     name: 'PostDetail',
-    component: PostdataView
+    component: () => import('@/views/Postdata_View.vue')
   },
 
-  {path: '/gallery',
-   name: 'GalleryView',
-   component: GalleryView
+  { path: '/gallery',
+    name: 'GalleryView',
+    component: () => import('@/views/Gallery_View.vue')
   },
 
-  {path: '/gallery/:id',
-   name: 'Gallerydetail',
-   component: () => import('@/views/Gallerydetail_view.vue')
+  { path: '/gallery/:id',
+    name: 'Gallerydetail',
+    component: () => import('@/views/Gallerydetail_view.vue')
   }
 ]
 

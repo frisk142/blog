@@ -3,8 +3,8 @@
       <div v-if="currentAlbum" class="detail-content">
         <header class="page-header">
           <button class="back-btn font-text" @click="$router.back()">←返回</button>
-          <h1>{{ currentAlbum.title }}</h1>
-          <p class="desc">{{ currentAlbum.desc }}</p>
+          <h1 class="font-text">{{ currentAlbum.title }}</h1>
+          <p class="desc font-text">{{ currentAlbum.desc }}</p>
         </header>
 
         <div class="image-grid">
