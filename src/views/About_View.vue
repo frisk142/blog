@@ -3,7 +3,7 @@
   <div class="about">
     <h1>关于我</h1>
     <Blog-Card>
-      <img src = "/public/images/01.jpg" alt = "灵梦" class = "avatar">
+      <img src = "/images/01.webp" alt = "灵梦" class = "avatar">
       <p>你好！我是一个热爱编程和技术的开发者，喜欢探索新的技术和工具。这个博客是我记录学习过程和分享经验的平台，希望能与更多人交流和成长。</p>
       <p>希望通过博客记录成长，分享技术心得</p>
     </Blog-Card>

@@ -36,6 +36,12 @@ const routes = [
   { path: '/gallery/:id',
     name: 'Gallerydetail',
     component: () => import('@/views/Gallerydetail_view.vue')
+  },
+
+  { path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound_view.vue')
+
   }
 ]
 
